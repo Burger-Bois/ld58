@@ -1,6 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=23 format=3 uid="uid://ctgo8mssfywbo"]
 
+[ext_resource type="Script" uid="uid://dgrcjobwm2kqq" path="res://src/stage/stage.gd" id="1_43xs6"]
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
+[ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
+[ext_resource type="PackedScene" uid="uid://c2aysul8xes3t" path="res://src/ui/pause_menu.tscn" id="3_43xs6"]
 [ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/object/random_object.tscn" id="3_78rax"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
@@ -46,7 +49,21 @@ size = Vector2(13, 140.49998)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_60fcs"]
 
 [node name="Stage" type="Node2D"]
-position = Vector2(3, 0)
+process_mode = 1
+script = ExtResource("1_43xs6")
+
+[node name="Pauser" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_j58fr")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("3_43xs6")]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+offset_left = 3.0
+offset_right = 3.0
 
 [node name="Player" parent="." instance=ExtResource("1_dnqew")]
 position = Vector2(60, 63)
