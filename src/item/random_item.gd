@@ -1,4 +1,6 @@
+class_name Item
 extends RigidBody2D
+
 
 func _init() -> void:
 	generate_shape()

@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=24 format=3 uid="uid://ctgo8mssfywbo"]
 
-[ext_resource type="Script" uid="uid://dgrcjobwm2kqq" path="res://src/stage/stage.gd" id="1_43xs6"]
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
 [ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
 [ext_resource type="PackedScene" uid="uid://c2aysul8xes3t" path="res://src/ui/pause_menu.tscn" id="3_43xs6"]
-[ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/object/random_object.tscn" id="3_78rax"]
+[ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/item/random_item.tscn" id="3_78rax"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
 
@@ -46,11 +45,16 @@ size = Vector2(13, 138.99998)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s633r"]
 size = Vector2(13, 140.49998)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvnpy"]
+size = Vector2(561, 257)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_itwdx"]
+size = Vector2(264, 180)
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_60fcs"]
 
 [node name="Stage" type="Node2D"]
 process_mode = 1
-script = ExtResource("1_43xs6")
 
 [node name="Pauser" type="Node" parent="."]
 process_mode = 3
@@ -201,13 +205,25 @@ scale = Vector2(1, 1.0000001)
 shape = SubResource("RectangleShape2D_s633r")
 one_way_collision_margin = 12.1
 
-[node name="RandomObject" parent="." instance=ExtResource("3_78rax")]
+[node name="ScoreArea" type="Area2D" parent="Ship"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/ScoreArea"]
+position = Vector2(593.5, 464.5)
+shape = SubResource("RectangleShape2D_pvnpy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ship/ScoreArea"]
+position = Vector2(595, 269)
+shape = SubResource("RectangleShape2D_itwdx")
+
+[node name="RandomItem" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(291, 63)
 
-[node name="RandomObject2" parent="." instance=ExtResource("3_78rax")]
+[node name="RandomItem2" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(593, 80)
 
-[node name="RandomObject3" parent="." instance=ExtResource("3_78rax")]
+[node name="RandomItem3" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(426, 95)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
