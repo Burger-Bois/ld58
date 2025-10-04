@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=19 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
-[ext_resource type="PackedScene" uid="uid://dwsljw5cg21qt" path="res://src/object/object.tscn" id="2_60fcs"]
 [ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/object/random_object.tscn" id="3_78rax"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
@@ -179,9 +178,6 @@ position = Vector2(726, 257)
 scale = Vector2(1, 1.0000001)
 shape = SubResource("RectangleShape2D_s633r")
 one_way_collision_margin = 12.1
-
-[node name="Object" parent="." instance=ExtResource("2_60fcs")]
-position = Vector2(241, 246)
 
 [node name="RandomObject" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(291, 63)

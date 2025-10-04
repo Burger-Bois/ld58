@@ -2,16 +2,20 @@ extends RigidBody2D
 
 func _init() -> void:
 	
-	var random_points = create_deformed_polygon(randf_range(3,10), randf_range(20,60))
+	var random_points = generate_polygon_points(randi_range(3,10), randi_range(20,60))
 	var polygon = Polygon2D.new()
 	var collision = CollisionPolygon2D.new()
 	polygon.set_polygon(random_points)
 	collision.set_polygon(random_points)
 	add_child(polygon)
-	add_child(collision)	
+	add_child(collision)
+	var direction = Vector2(randf_range(0, TAU), randf_range(0, TAU))
+	var rotation = randf_range(-PI/4, PI/4)
+	var speed = randf_range(2,10)
+	apply_central_impulse(direction.rotated(rotation) * speed)
 	
 	
-func create_deformed_polygon(vertex_count : int, radius : float) -> PackedVector2Array:
+func generate_polygon_points(vertex_count : int, radius : float) -> PackedVector2Array:
 	var points : PackedVector2Array = []
 	var angle_increment : float = TAU / vertex_count
 	for i in vertex_count:
