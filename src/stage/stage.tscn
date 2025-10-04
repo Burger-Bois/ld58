@@ -1,7 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=9 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_60fcs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78rax"]
+size = Vector2(576, 16.722)
+
+[sub_resource type="QuadMesh" id="QuadMesh_60fcs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43xs6"]
+size = Vector2(16, 273.99997)
+
+[sub_resource type="QuadMesh" id="QuadMesh_j58fr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y8ixn"]
+size = Vector2(16, 273.99997)
 
 [node name="Stage" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_dnqew")]
+
+[node name="Background" type="Polygon2D" parent="."]
+z_index = -10
+position = Vector2(278, 135)
+color = Color(0, 0.061109856, 0.061214797, 1)
+polygon = PackedVector2Array(-640, -379, -640, 817, 1275, 820, 1265, -376)
+metadata/_edit_lock_ = true
+
+[node name="Ship" type="StaticBody2D" parent="."]
+position = Vector2(594, 571)
+
+[node name="WallBottom" type="MeshInstance2D" parent="Ship"]
+clip_children = 2
+rotation = -3.1415925
+scale = Vector2(574.51575, 15.274408)
+mesh = SubResource("QuadMesh_dnqew")
+metadata/_edit_lock_ = true
+
+[node name="WallBottomHitbox" type="CollisionShape2D" parent="Ship"]
+material = SubResource("CanvasItemMaterial_60fcs")
+scale = Vector2(1, 1.0000001)
+shape = SubResource("RectangleShape2D_78rax")
+metadata/_edit_lock_ = true
+
+[node name="WallLeft" type="MeshInstance2D" parent="Ship"]
+clip_children = 2
+position = Vector2(-279, -130)
+rotation = -3.1415925
+scale = Vector2(17.040197, 274.47806)
+mesh = SubResource("QuadMesh_60fcs")
+metadata/_edit_lock_ = true
+
+[node name="WallLeftHitbox" type="CollisionShape2D" parent="Ship"]
+material = SubResource("CanvasItemMaterial_60fcs")
+position = Vector2(-279, -129)
+scale = Vector2(1, 1.0000001)
+shape = SubResource("RectangleShape2D_43xs6")
+metadata/_edit_lock_ = true
+
+[node name="WallRight" type="MeshInstance2D" parent="Ship"]
+clip_children = 2
+position = Vector2(280, -129)
+rotation = -3.1415925
+scale = Vector2(17.040197, 274.47806)
+mesh = SubResource("QuadMesh_j58fr")
+metadata/_edit_lock_ = true
+
+[node name="WallRightHitbox" type="CollisionShape2D" parent="Ship"]
+material = SubResource("CanvasItemMaterial_60fcs")
+position = Vector2(280, -129)
+scale = Vector2(1, 1.0000001)
+shape = SubResource("RectangleShape2D_y8ixn")
+metadata/_edit_lock_ = true
