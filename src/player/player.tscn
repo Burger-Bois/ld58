@@ -19,7 +19,8 @@ radius = 32.0
 radius = 8.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 7
+collision_mask = 2
+motion_mode = 1
 script = ExtResource("1_4anbu")
 
 [node name="Nose" type="MeshInstance2D" parent="."]
@@ -56,3 +57,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
 position = Vector2(40, 0)
 shape = SubResource("CircleShape2D_4anbu")
+
+[node name="GrabJoint" type="GrooveJoint2D" parent="."]
+unique_name_in_owner = true
+rotation = -1.5707964
+node_a = NodePath("..")
+length = 40.0

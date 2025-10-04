@@ -8,6 +8,8 @@ var speed := 200.0
 var arms: Node2D = %Arms
 @onready
 var grab_area: Area2D = %GrabArea
+@onready
+var grab_joint: Joint2D = %GrabJoint
 
 
 func _process(_delta: float) -> void:
@@ -36,7 +38,12 @@ func _input(event: InputEvent) -> void:
 				_grab(object)
 		else:
 			arms.hide()
+			_release()
 
 
-func _grab(object: Node2D) -> void:
-	print('Grabbed object: ' + str(object))
+func _grab(object: RigidBody2D) -> void:
+	grab_joint.node_b = object.get_path()
+
+
+func _release() -> void:
+	grab_joint.node_b = get_path()
