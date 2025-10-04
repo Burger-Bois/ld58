@@ -8,8 +8,8 @@ var speed := 200.0
 var arms: Node2D = %Arms
 @onready
 var grab_area: Area2D = %GrabArea
-@onready
-var grab_joint: Joint2D = %GrabJoint
+
+var _grabbed_object: Object
 
 
 func _process(_delta: float) -> void:
@@ -42,8 +42,13 @@ func _input(event: InputEvent) -> void:
 
 
 func _grab(object: RigidBody2D) -> void:
-	grab_joint.node_b = object.get_path()
+	object.freeze = true
+	object.reparent(self, true)
+	_grabbed_object = object
 
 
 func _release() -> void:
-	grab_joint.node_b = get_path()
+	if is_instance_valid(_grabbed_object):
+		_grabbed_object.reparent(get_parent(), true)
+		_grabbed_object.freeze = false
+		_grabbed_object = null
