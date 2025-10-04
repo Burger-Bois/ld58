@@ -33,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		if collider is RigidBody2D:
-			collider.apply_central_impulse(-collision.get_normal() * 80)
+			collider.apply_central_impulse(-collision.get_normal() * 20)
 
 
 func _input(event: InputEvent) -> void:
@@ -70,7 +70,7 @@ func _release() -> void:
 		_grabbed_object.freeze = false
 		_grabbed_object.reparent(get_parent(), true)
 		_grabbed_object.reset_physics_interpolation()
-		remove_collision_exception_with(_grabbed_object)
+		call_deferred('remove_collision_exception_with', _grabbed_object)
 		# Remove object collision shapes from player
 		for object_collision_shape in _object_collision_shapes:
 			object_collision_shape.queue_free()

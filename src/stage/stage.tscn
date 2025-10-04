@@ -46,6 +46,7 @@ size = Vector2(13, 140.49998)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_60fcs"]
 
 [node name="Stage" type="Node2D"]
+position = Vector2(3, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_dnqew")]
 position = Vector2(60, 63)
