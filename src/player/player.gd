@@ -1,14 +1,21 @@
 class_name Player
 extends CharacterBody2D
 
-@export
-var speed := 200.0
 
+@export
+var default_speed = 180
+@export
+var sprint_multiplier = 1.6
+
+
+@onready
+var sprint_speed = default_speed * sprint_multiplier
 @onready
 var arms: Node2D = %Arms
 @onready
 var grab_area: Area2D = %GrabArea
 
+var _speed: float = default_speed
 var _grabbed_object: Object
 var _object_collision_shapes: Array[CollisionPolygon2D] = []
 
@@ -21,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 		'player_move_up',
 		'player_move_down',
 	).normalized()
-	velocity = direction * speed
+	velocity = direction * _speed
 	move_and_slide()
 
 	# Look at mouse
@@ -37,6 +44,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action('player_sprint'):
+		if event.is_action_released('player_sprint'):
+			_speed = default_speed
+		else:
+			_speed = sprint_speed
+		
 	if event.is_action('player_grab'):
 		if event.is_pressed():
 			arms.show()
