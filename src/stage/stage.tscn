@@ -1,9 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=26 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
 [ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
 [ext_resource type="PackedScene" uid="uid://c2aysul8xes3t" path="res://src/ui/pause_menu.tscn" id="3_43xs6"]
 [ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/item/random_item.tscn" id="3_78rax"]
+[ext_resource type="PackedScene" uid="uid://coq3q4mphg2ms" path="res://src/ui/stage_ui.tscn" id="3_y8ixn"]
+[ext_resource type="Script" uid="uid://c24gixp7b8hex" path="res://src/ship/collection_area.gd" id="4_j58fr"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
 
@@ -68,6 +70,8 @@ process_mode = 2
 visible = false
 offset_left = 3.0
 offset_right = 3.0
+
+[node name="StageUI" parent="UI" instance=ExtResource("3_y8ixn")]
 
 [node name="Player" parent="." instance=ExtResource("1_dnqew")]
 position = Vector2(60, 63)
@@ -205,15 +209,16 @@ scale = Vector2(1, 1.0000001)
 shape = SubResource("RectangleShape2D_s633r")
 one_way_collision_margin = 12.1
 
-[node name="ScoreArea" type="Area2D" parent="Ship"]
+[node name="CollectionArea" type="Area2D" parent="Ship"]
 collision_layer = 0
 collision_mask = 4
+script = ExtResource("4_j58fr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/ScoreArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/CollectionArea"]
 position = Vector2(593.5, 464.5)
 shape = SubResource("RectangleShape2D_pvnpy")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ship/ScoreArea"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ship/CollectionArea"]
 position = Vector2(595, 269)
 shape = SubResource("RectangleShape2D_itwdx")
 
