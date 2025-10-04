@@ -12,7 +12,7 @@ var grab_area: Area2D = %GrabArea
 var _grabbed_object: Object
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Move
 	var direction := Input.get_vector(
 		'player_move_left',
@@ -26,6 +26,13 @@ func _process(_delta: float) -> void:
 	# Look at mouse
 	var mouse_position := get_viewport().get_mouse_position()
 	look_at(mouse_position)
+
+	# Push objects
+	for i in range(get_slide_collision_count()):
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider is RigidBody2D:
+			collider.apply_central_impulse(-collision.get_normal() * 80)
 
 
 func _input(event: InputEvent) -> void:
@@ -42,13 +49,15 @@ func _input(event: InputEvent) -> void:
 
 
 func _grab(object: RigidBody2D) -> void:
-	object.freeze = true
 	object.reparent(self, true)
+	object.reset_physics_interpolation()
+	object.freeze = true
 	_grabbed_object = object
 
 
 func _release() -> void:
 	if is_instance_valid(_grabbed_object):
-		_grabbed_object.reparent(get_parent(), true)
 		_grabbed_object.freeze = false
+		_grabbed_object.reparent(get_parent(), true)
+		_grabbed_object.reset_physics_interpolation()
 		_grabbed_object = null

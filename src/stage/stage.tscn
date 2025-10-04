@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
 [ext_resource type="PackedScene" uid="uid://dwsljw5cg21qt" path="res://src/object/object.tscn" id="2_60fcs"]
-[ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/randomObject/randomObject.tscn" id="3_78rax"]
+[ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/object/random_object.tscn" id="3_78rax"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
 
@@ -189,5 +189,5 @@ position = Vector2(291, 63)
 [node name="RandomObject2" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(593, 80)
 
-[node name="RandomObject" parent="RandomObject2" instance=ExtResource("3_78rax")]
-position = Vector2(-167, 15)
+[node name="RandomObject3" parent="." instance=ExtResource("3_78rax")]
+position = Vector2(426, 95)
