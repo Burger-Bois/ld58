@@ -1,10 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://i241o52relhs"]
+[gd_scene load_steps=7 format=3 uid="uid://i241o52relhs"]
 
 [ext_resource type="Script" uid="uid://ckqvloqcmrt1y" path="res://src/player/player.gd" id="1_4anbu"]
-[ext_resource type="Texture2D" uid="uid://dstft2ogyxgit" path="res://icon.svg" id="2_rxibo"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4anbu"]
+radius = 4.0
+height = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_4anbu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rxibo"]
+radius = 6.0
+height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxibo"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4anbu"]
+radius = 8.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 7
 script = ExtResource("1_4anbu")
 
-[node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("2_rxibo")
+[node name="Nose" type="MeshInstance2D" parent="."]
+position = Vector2(30, 0)
+rotation = 1.5707964
+mesh = SubResource("CapsuleMesh_4anbu")
+
+[node name="Body" type="MeshInstance2D" parent="."]
+scale = Vector2(64, 64)
+mesh = SubResource("SphereMesh_4anbu")
+
+[node name="Arms" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="LeftArm" type="MeshInstance2D" parent="Arms"]
+position = Vector2(18, -26)
+rotation = 1.5707964
+mesh = SubResource("CapsuleMesh_rxibo")
+
+[node name="RightArm" type="MeshInstance2D" parent="Arms"]
+position = Vector2(18, 26)
+rotation = 1.5707964
+mesh = SubResource("CapsuleMesh_rxibo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rxibo")
+
+[node name="GrabArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2(40, 0)
+shape = SubResource("CircleShape2D_4anbu")
