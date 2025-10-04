@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=20 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
 [ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/object/random_object.tscn" id="3_78rax"]
@@ -43,16 +43,20 @@ size = Vector2(13, 138.99998)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s633r"]
 size = Vector2(13, 140.49998)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_60fcs"]
+
 [node name="Stage" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_dnqew")]
 position = Vector2(60, 63)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
 [node name="Background" type="Polygon2D" parent="."]
 z_index = -10
 position = Vector2(278, 135)
 color = Color(0, 0.061109856, 0.061214797, 1)
-polygon = PackedVector2Array(-640, -379, -640, 817, 1275, 820, 1265, -376)
+polygon = PackedVector2Array(-1118, -849, -1103, 1436, 1923, 1485, 1885, -835)
 metadata/_edit_lock_ = true
 
 [node name="Ship" type="Node2D" parent="."]
@@ -187,3 +191,27 @@ position = Vector2(593, 80)
 
 [node name="RandomObject3" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(426, 95)
+
+[node name="WorldBoundary" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="WorldBoundaryNorth" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(0, -354)
+rotation = -3.1415927
+shape = SubResource("WorldBoundaryShape2D_60fcs")
+
+[node name="WorldBoundarySouth" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(0, 1120)
+rotation = -6.2831855
+shape = SubResource("WorldBoundaryShape2D_60fcs")
+
+[node name="WorldBoundaryWest" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(-210, 1120)
+rotation = -4.712389
+shape = SubResource("WorldBoundaryShape2D_60fcs")
+
+[node name="WorldBoundaryEast" type="CollisionShape2D" parent="WorldBoundary"]
+position = Vector2(1576, 1120)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_60fcs")
