@@ -10,6 +10,7 @@ var arms: Node2D = %Arms
 var grab_area: Area2D = %GrabArea
 
 var _grabbed_object: Object
+var _object_collision_shapes: Array[CollisionPolygon2D] = []
 
 
 func _physics_process(_delta: float) -> void:
@@ -53,6 +54,14 @@ func _grab(object: RigidBody2D) -> void:
 	object.reparent(self, true)
 	object.reset_physics_interpolation()
 	object.freeze = true
+	# Add object collision shapes to player
+	for child in object.get_children():
+		if child is CollisionPolygon2D:
+			var dupe_collision_shape := child.duplicate()
+			add_child(dupe_collision_shape)
+			dupe_collision_shape.global_position = child.global_position
+			dupe_collision_shape.global_rotation = child.global_rotation
+			_object_collision_shapes.append(dupe_collision_shape)
 	_grabbed_object = object
 
 
@@ -62,4 +71,8 @@ func _release() -> void:
 		_grabbed_object.reparent(get_parent(), true)
 		_grabbed_object.reset_physics_interpolation()
 		remove_collision_exception_with(_grabbed_object)
+		# Remove object collision shapes from player
+		for object_collision_shape in _object_collision_shapes:
+			object_collision_shape.queue_free()
+		_object_collision_shapes = []
 		_grabbed_object = null
