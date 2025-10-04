@@ -49,6 +49,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _grab(object: RigidBody2D) -> void:
+	add_collision_exception_with(object)
 	object.reparent(self, true)
 	object.reset_physics_interpolation()
 	object.freeze = true
@@ -60,4 +61,5 @@ func _release() -> void:
 		_grabbed_object.freeze = false
 		_grabbed_object.reparent(get_parent(), true)
 		_grabbed_object.reset_physics_interpolation()
+		remove_collision_exception_with(_grabbed_object)
 		_grabbed_object = null
