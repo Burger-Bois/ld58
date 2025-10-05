@@ -27,6 +27,8 @@ var minimap: Minimap = %Minimap
 
 var _level: Level
 
+func _init() -> void:
+	SignalBus.game_over.connect(_game_over)
 
 func _ready() -> void:
 	_level = LEVEL_SCENE.instantiate()
@@ -59,16 +61,8 @@ func start() -> void:
 		item.position = item_spawn_position
 		add_child(item)
 
-	var timer := Timer.new()
-	timer.wait_time = end_time
-	timer.autostart = true
-	timer.timeout.connect(game_over)
-	add_child(timer)
-	stage_ui.stage_timer = timer
-	SignalBus.player_oxygen_changed.emit((timer.time_left/timer.wait_time) * 100)
 
-
-func game_over() -> void:
+func _game_over() -> void:
 	pauser.process_mode = Node.PROCESS_MODE_DISABLED
 	get_tree().paused = true
 	end_menu.show()

@@ -3,13 +3,11 @@ extends CharacterBody2D
 
 
 @export
-var default_speed = 180
+var default_speed := 180.0
 @export
-var sprint_multiplier = 1.6
+var multiplier := 1.6
 
 
-@onready
-var sprint_speed = default_speed * sprint_multiplier
 @onready
 var arms: Node2D = %Arms
 @onready
@@ -18,8 +16,12 @@ var grab_area: Area2D = %GrabArea
 var use_box: Area2D = %UseBox
 
 var _speed: float = default_speed
+var _oxygen: Oxygen = Oxygen.new()
 var _grabbed_object: Item
 var _object_collision_shapes: Array[CollisionPolygon2D] = []
+
+var is_sprinting: bool = false
+var sprint_speed: float = default_speed * multiplier
 
 
 func _physics_process(delta: float) -> void:
@@ -54,14 +56,24 @@ func _physics_process(delta: float) -> void:
 		var collider := collision.get_collider()
 		if collider is RigidBody2D:
 			collider.apply_central_impulse(-collision.get_normal() * 20)
+	
+	update_oxygen(1*delta)
+	
 
+func update_oxygen(minus: float) -> void:
+	if is_sprinting:
+		_oxygen.reduce_oxygen(minus * multiplier)
+	else:
+		_oxygen.reduce_oxygen(minus)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action('player_sprint'):
 		if event.is_action_released('player_sprint'):
 			_speed = default_speed
+			is_sprinting = false
 		else:
 			_speed = sprint_speed
+			is_sprinting = true
 	
 	if event.is_action('player_grab'):
 		if event.is_pressed():
