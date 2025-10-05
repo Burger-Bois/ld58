@@ -48,7 +48,7 @@ func start() -> void:
 	var camera := Camera2D.new()
 	player.add_child(camera)
 
-	for i in range(32):
+	for i in range(50):
 		var item_spawn_position := _level.random_in_bounds()
 		var item := ITEM_SCENE.instantiate() as Item
 		item.position = item_spawn_position

@@ -21,11 +21,11 @@ var points: int
 func _init() -> void:
 	var radius := randf_range(radius_min, radius_max)
 	generate_shape(radius)
-	push_randomly()
 	mass = radius
 	points = calcuate_points(mass)
-	linear_damp = calculate_linear_damp(radius)
+	#linear_damp = calculate_linear_damp(radius)
 	modulate = Color.from_hsv(randf_range(0,1),0.6,1.0)
+	push_randomly()
 
 func calcuate_points(itemMass: float) -> int:
 	var minPoints = 1
@@ -56,7 +56,7 @@ func generate_shape(radius: float) -> void:
 func push_randomly() -> void:
 	var direction = Vector2(randf_range(0, TAU), randf_range(0, TAU))
 	var rot = randf_range(-PI/4, PI/4)
-	var speed = randf_range(2,10)
+	var speed = randf_range(10,25)
 	apply_central_impulse(direction.rotated(rot) * speed)
 
 func calculate_linear_damp(radius: float) -> float:

@@ -16,7 +16,6 @@ shader_parameter/bloom_intensity = 1.0
 [node name="Stage" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_804oe")
-end_time = 60.0
 
 [node name="Pauser" type="Node" parent="."]
 unique_name_in_owner = true
