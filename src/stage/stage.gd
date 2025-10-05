@@ -9,7 +9,6 @@ const SHIP_SCENE := preload('res://src/ship/ship.tscn') as PackedScene
 const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
 const ITEM_SCENE := preload('res://src/item/random_item.tscn') as PackedScene
 
-
 @export
 var end_time: float = 120.0
 @export
@@ -23,6 +22,8 @@ var pause_menu: PauseMenu = %PauseMenu
 var pauser: Pauser = %Pauser
 @onready
 var stage_ui: StageUI = %StageUI
+@onready
+var minimap: Minimap = %Minimap
 
 var _level: Level
 
@@ -49,6 +50,8 @@ func start() -> void:
 
 	var camera := Camera2D.new()
 	player.add_child(camera)
+
+	minimap.to_follow = player
 
 	for i in range(50):
 		var item_spawn_position := _level.random_in_bounds()
