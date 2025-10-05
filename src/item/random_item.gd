@@ -26,12 +26,12 @@ func _init() -> void:
 	points = calcuate_points(mass)
 	linear_damp = calculate_linear_damp(radius)
 
-func calcuate_points(mass: float) -> int:
-	var min = 1
-	var points = int(mass / 20)
-	if (points < min):
-		return min
-	return points
+func calcuate_points(itemMass: float) -> int:
+	var minPoints = 1
+	var calcPoints = int(itemMass / 20)
+	if (calcPoints < minPoints):
+		return minPoints
+	return calcPoints
 	
 func generate_polygon_points(vertex_count : int, radius : float) -> PackedVector2Array:
 	var points : PackedVector2Array = []
