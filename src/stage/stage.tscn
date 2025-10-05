@@ -1,11 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=28 format=3 uid="uid://ctgo8mssfywbo"]
 
+[ext_resource type="Script" uid="uid://drr3evi0hcxu" path="res://src/stage/stage.gd" id="1_804oe"]
 [ext_resource type="PackedScene" uid="uid://i241o52relhs" path="res://src/player/player.tscn" id="1_dnqew"]
 [ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
 [ext_resource type="PackedScene" uid="uid://c2aysul8xes3t" path="res://src/ui/pause_menu.tscn" id="3_43xs6"]
 [ext_resource type="PackedScene" uid="uid://di3ankhvi8xyx" path="res://src/item/random_item.tscn" id="3_78rax"]
 [ext_resource type="PackedScene" uid="uid://coq3q4mphg2ms" path="res://src/ui/stage_ui.tscn" id="3_y8ixn"]
 [ext_resource type="Script" uid="uid://c24gixp7b8hex" path="res://src/ship/collection_area.gd" id="4_j58fr"]
+[ext_resource type="PackedScene" uid="uid://bryos5qedcjd1" path="res://src/ui/end_menu.tscn" id="5_pvnpy"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnqew"]
 
@@ -57,12 +59,23 @@ size = Vector2(264, 180)
 
 [node name="Stage" type="Node2D"]
 process_mode = 1
+script = ExtResource("1_804oe")
+end_time = 60.0
 
 [node name="Pauser" type="Node" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("2_j58fr")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="StageUI" parent="UI" instance=ExtResource("3_y8ixn")]
+unique_name_in_owner = true
+
+[node name="EndMenu" parent="UI" instance=ExtResource("5_pvnpy")]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("3_43xs6")]
 unique_name_in_owner = true
@@ -70,8 +83,6 @@ process_mode = 2
 visible = false
 offset_left = 3.0
 offset_right = 3.0
-
-[node name="StageUI" parent="UI" instance=ExtResource("3_y8ixn")]
 
 [node name="Player" parent="." instance=ExtResource("1_dnqew")]
 position = Vector2(60, 63)

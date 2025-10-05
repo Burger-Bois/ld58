@@ -1,15 +1,11 @@
-class_name PauseMenu
+class_name EndMenu
 extends Control
 
-signal resume_pressed()
 signal main_menu_pressed()
 
-@onready
-var resume_button: Button = %ResumeButton
 @onready
 var main_menu_button: Button = %MainMenuButton
 
 
 func _ready() -> void:
-	resume_button.pressed.connect(resume_pressed.emit)
 	main_menu_button.pressed.connect(main_menu_pressed.emit)
