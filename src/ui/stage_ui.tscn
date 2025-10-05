@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://coq3q4mphg2ms"]
+[gd_scene load_steps=4 format=3 uid="uid://coq3q4mphg2ms"]
 
-[ext_resource type="Script" uid="uid://decq0aptt2m5t" path="res://src/ui/stage_ui.gd" id="1_omjwo"]
 [ext_resource type="Script" uid="uid://dprqqjqa2qf5n" path="res://src/ui/oxygen_bar.gd" id="2_eilgr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eilgr"]
@@ -20,22 +19,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_omjwo")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 45.0
-grow_horizontal = 2
-
-[node name="ScoreLabel" type="Label" parent="HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 1
 
 [node name="OxygenBar" type="ProgressBar" parent="."]
 top_level = true
@@ -59,19 +42,6 @@ value = 100.0
 fill_mode = 3
 show_percentage = false
 script = ExtResource("2_eilgr")
-
-[node name="TimeLabel" type="Label" parent="OxygenBar"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 40.0
-offset_top = 153.0
-offset_right = 105.0
-offset_bottom = 198.0
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "0"
-horizontal_alignment = 2
 
 [node name="Label" type="Label" parent="OxygenBar"]
 layout_mode = 0

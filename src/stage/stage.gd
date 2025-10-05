@@ -21,8 +21,6 @@ var pause_menu: PauseMenu = %PauseMenu
 @onready
 var pauser: Pauser = %Pauser
 @onready
-var stage_ui: StageUI = %StageUI
-@onready
 var minimap: Minimap = %Minimap
 
 var _level: Level

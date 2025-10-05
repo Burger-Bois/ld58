@@ -6,6 +6,7 @@ var oxygen_paused: bool = true
 
 func _init() -> void:
 	SignalBus.player_oxygen_paused.connect(_handle_oxygen_pause)
+	SignalBus.player_oxygen_changed.emit(_value)
 
 func reduce_oxygen(minus: float) -> void:
 	if !oxygen_paused:
