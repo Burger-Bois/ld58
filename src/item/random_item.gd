@@ -25,6 +25,7 @@ func _init() -> void:
 	mass = radius
 	points = calcuate_points(mass)
 	linear_damp = calculate_linear_damp(radius)
+	modulate = Color.from_hsv(randf_range(0,1),0.6,1.0)
 
 func calcuate_points(itemMass: float) -> int:
 	var minPoints = 1
