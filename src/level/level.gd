@@ -189,7 +189,7 @@ func create_room(room: Room) -> void:
 			)
 
 
-func create_corridor(pos_1: Vector2, pos_2: Vector2):
+func create_corridor(pos_1: Vector2, pos_2: Vector2, width: int = 2):
 	var start: Vector2i
 	var end: Vector2i
 	if (randi() % 2) > 0:
@@ -206,22 +206,23 @@ func create_corridor(pos_1: Vector2, pos_2: Vector2):
 	# choose either x/y or y/x
 	var x_y = start
 	var y_x = end
-	for x in range(start.x, end.x + (1 * x_diff), x_diff):
-		var target_cell := Vector2i(x, x_y.y)
-		Map.set_cell(target_cell, SOURCE_ID, Vector2i(0, 0), FLOOR_ID)
-		for direction in DIRECTIONS:
-			var adjacent_cell := target_cell + direction
-			var adjacent_cell_id := Map.get_cell_source_id(adjacent_cell)
-			if adjacent_cell_id == -1:
-				Map.set_cell(adjacent_cell, SOURCE_ID, Vector2i(0, 0), WALL_ID)
-	for y in range(start.y, end.y + (1 * y_diff), y_diff):
-		var target_cell := Vector2i(y_x.x, y)
-		Map.set_cell(target_cell, SOURCE_ID, Vector2i(0, 0), FLOOR_ID)
-		for direction in DIRECTIONS:
-			var adjacent_cell := target_cell + direction
-			var adjacent_cell_id := Map.get_cell_source_id(adjacent_cell)
-			if adjacent_cell_id == -1:
-				Map.set_cell(adjacent_cell, SOURCE_ID, Vector2i(0, 0), WALL_ID)
+	for x in range(start.x, end.x + width * x_diff, x_diff):
+		for y_offset in range(-(width - 1), width):
+			var target_cell := Vector2i(x, x_y.y + y_offset)
+			place_floor(target_cell)
+	for y in range(start.y, end.y + width * y_diff, y_diff):
+		for x_offset in range(-(width - 1), width):
+			var target_cell := Vector2i(y_x.x + x_offset, y)
+			place_floor(target_cell)
+
+
+func place_floor(coords: Vector2i) -> void:
+	Map.set_cell(coords, SOURCE_ID, Vector2i(0, 0), FLOOR_ID)
+	for direction in DIRECTIONS:
+		var adjacent_cell := coords + direction
+		var adjacent_cell_id := Map.get_cell_source_id(adjacent_cell)
+		if adjacent_cell_id == -1:
+			Map.set_cell(adjacent_cell, SOURCE_ID, Vector2i(0, 0), WALL_ID)
 
 
 func find_start_room():

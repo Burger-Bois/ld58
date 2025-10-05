@@ -19,6 +19,3 @@ script = ExtResource("1_xv147")
 tile_set = SubResource("TileSet_la7um")
 
 [node name="Rooms" type="Node" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.1, 0.1)
