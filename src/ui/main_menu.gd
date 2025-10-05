@@ -32,4 +32,4 @@ func _ready() -> void:
 	
 func push_letters(letters: Array) -> void:
 	for l in letters:
-		l.apply_central_impulse(Vector2.RIGHT.rotated(randf_range(0, TAU)) * 5)
+		l.apply_central_impulse(Vector2.RIGHT.rotated(randf_range(0, TAU)) * 40)
