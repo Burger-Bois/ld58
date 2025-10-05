@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=10 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="Script" uid="uid://drr3evi0hcxu" path="res://src/stage/stage.gd" id="1_804oe"]
 [ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://coq3q4mphg2ms" path="res://src/ui/stage_ui.tscn" id="3_y8ixn"]
 [ext_resource type="PackedScene" uid="uid://bryos5qedcjd1" path="res://src/ui/end_menu.tscn" id="5_pvnpy"]
 [ext_resource type="AudioStream" uid="uid://cxcvtton1exu7" path="res://src/assets/ShipShape.mp3" id="7_804oe"]
+[ext_resource type="Script" uid="uid://d4dqr376dcyoj" path="res://src/stage/minimap_viewport.gd" id="8_pvnpy"]
 [ext_resource type="Shader" uid="uid://880t7aps3sjm" path="res://src/stage/neon.gdshader" id="9_puyty"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_puyty"]
@@ -15,6 +16,7 @@ shader_parameter/bloom_intensity = 1.0
 
 [node name="Stage" type="Node2D"]
 process_mode = 1
+visibility_layer = 3
 script = ExtResource("1_804oe")
 
 [node name="Pauser" type="Node" parent="."]
@@ -53,3 +55,26 @@ offset_right = 3.0
 stream = ExtResource("7_804oe")
 volume_db = -13.071
 autoplay = true
+
+[node name="MinimapLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinimapLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+
+[node name="Minimap" type="SubViewport" parent="MinimapLayer/SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+canvas_cull_mask = 4294967294
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+script = ExtResource("8_pvnpy")
+
+[node name="MinimapCamera" type="Camera2D" parent="MinimapLayer/SubViewportContainer/Minimap"]
+unique_name_in_owner = true
+visibility_layer = 2
+zoom = Vector2(0.08, 0.08)
