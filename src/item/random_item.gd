@@ -1,10 +1,22 @@
 class_name Item
 extends RigidBody2D
 
+@export
+var radius_min: float = 10.0
+@export
+var radius_max: float = 100.0
+
+@export
+var vertex_count_min: int = 3
+@export
+var vertex_count_max: int = 10
+
 
 func _init() -> void:
-	generate_shape()
+	var radius := randf_range(radius_min, radius_max)
+	generate_shape(radius)
 	push_randomly()
+	mass = radius
 	
 func generate_polygon_points(vertex_count : int, radius : float) -> PackedVector2Array:
 	var points : PackedVector2Array = []
@@ -15,8 +27,9 @@ func generate_polygon_points(vertex_count : int, radius : float) -> PackedVector
 		points.append(point)
 	return points
 	
-func generate_shape() -> void:
-	var random_points = generate_polygon_points(randi_range(3,10), randi_range(20,60))
+func generate_shape(radius: float) -> void:
+	var vertex_count = randi_range(vertex_count_min, vertex_count_max)
+	var random_points = generate_polygon_points(vertex_count, radius)
 	var polygon = Polygon2D.new()
 	var collision = CollisionPolygon2D.new()
 	polygon.set_polygon(random_points)
