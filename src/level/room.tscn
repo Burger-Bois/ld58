@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dokkjcc5m3wap"]
+
+[ext_resource type="Script" uid="uid://b8gfp6781kxgb" path="res://src/level/room.gd" id="1_2w3qx"]
+
+[node name="Room" type="RigidBody2D"]
+disable_mode = 1
+can_sleep = false
+script = ExtResource("1_2w3qx")

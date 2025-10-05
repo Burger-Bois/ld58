@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyrcsn2kh4efq"]
+
+[ext_resource type="PackedScene" uid="uid://cuqt2ddgabgxl" path="res://src/level/tiles/WallTile.tscn" id="1_la7um"]
+[ext_resource type="Script" uid="uid://b7ft33waajc6u" path="res://src/level/level.gd" id="1_xv147"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xv147"]
+scenes/1/scene = ExtResource("1_la7um")
+
+[sub_resource type="TileSet" id="TileSet_la7um"]
+sources/0 = SubResource("TileSetScenesCollectionSource_xv147")
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_xv147")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_la7um")
+
+[node name="Rooms" type="Node" parent="."]

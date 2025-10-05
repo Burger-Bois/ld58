@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuqt2ddgabgxl"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_m5fko"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nq1px"]
+size = Vector2(16, 16)
+
+[node name="WallTile" type="StaticBody2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(11.5, 10.5)
+scale = Vector2(22.999998, 21)
+mesh = SubResource("QuadMesh_m5fko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11.5, 10.5)
+shape = SubResource("RectangleShape2D_nq1px")
