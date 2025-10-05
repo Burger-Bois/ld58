@@ -11,12 +11,18 @@ var vertex_count_min: int = 3
 @export
 var vertex_count_max: int = 10
 
+@export
+var damping_min: float = 0.2
+@export
+var damping_max: float = 1.0
+
 
 func _init() -> void:
 	var radius := randf_range(radius_min, radius_max)
 	generate_shape(radius)
 	push_randomly()
 	mass = radius
+	linear_damp = calculate_linear_damp(radius)
 	
 func generate_polygon_points(vertex_count : int, radius : float) -> PackedVector2Array:
 	var points : PackedVector2Array = []
@@ -42,3 +48,7 @@ func push_randomly() -> void:
 	var rot = randf_range(-PI/4, PI/4)
 	var speed = randf_range(2,10)
 	apply_central_impulse(direction.rotated(rot) * speed)
+
+func calculate_linear_damp(radius: float) -> float:
+	var size := (radius - radius_min) / radius_max
+	return lerp(damping_min, damping_max, size)
