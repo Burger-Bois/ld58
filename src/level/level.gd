@@ -1,14 +1,14 @@
 extends Node2D
 
-@onready var Map = $TileMapLayer
+@onready var Map: TileMapLayer = $TileMapLayer
 
 var _room: Room
 
 
 var tile_size = 32
 var num_rooms = 20
-var min_size = 30
-var max_size = 70
+var min_size = 10
+var max_size = 30
 var hspread = 400
 var cull = 0.6
 
@@ -41,22 +41,20 @@ func make_rooms():
 			room_positions.append(Vector2(room.position.x, room.position.y))
 			
 	find_mst(room_positions)
+	queue_redraw()
 
 		
-func _draw():
-	for room in $Rooms.get_children():
-		draw_rect(Rect2(room.position - room.size, room.size * 2),
-				 Color(228.0, 228.0, 228.0, 1.0), false)
-	if path:
-		for p in path.get_point_ids():
-			for c in path.get_point_connections(p):
-				var pp = path.get_point_position(p)
-				var cp = path.get_point_position(c)
-				draw_line(pp, cp,Color(1, 1, 0), 15, true)
+# func _draw():
+# 	for room in $Rooms.get_children():
+# 		draw_rect(Rect2(room.position - room.size, room.size * 2),
+# 				 Color(228.0, 228.0, 228.0, 1.0), false)
+# 	if path:
+# 		for p in path.get_point_ids():
+# 			for c in path.get_point_connections(p):
+# 				var pp = path.get_point_position(p)
+# 				var cp = path.get_point_position(c)
+# 				draw_line(pp, cp,Color(1, 1, 0), 15, true)
 
-func _process(delta):
-	queue_redraw()
-	
 #func _input(event):
 	#if event.is_action_pressed('ui_select'):
 		#for n in $Rooms.get_children():
@@ -126,7 +124,7 @@ func make_map():
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 - 1):
 			for y in range(2, s.y * 2 - 1):
-				Map.set_cell(Vector2i(ul.x + x, ul.y + y), 0, Vector2i(0, 0), 1)
+				Map.set_cell(Vector2i(ul.x + x, ul.y + y), -1, Vector2i(0, 0), 1)
 		# Carve connecting corridor
 		var p = path.get_closest_point(Vector2(room.position.x, 
 											room.position.y))
@@ -138,7 +136,7 @@ func make_map():
 													path.get_point_position(conn).y))									
 				carve_path(start, end)
 		corridors.append(p)
-				
+
 func carve_path(pos1, pos2):
 	# Carve a path between two points
 	var x_diff = sign(pos2.x - pos1.x)
@@ -152,11 +150,11 @@ func carve_path(pos1, pos2):
 		x_y = pos2
 		y_x = pos1
 	for x in range(pos1.x, pos2.x, x_diff):
-		Map.set_cell(Vector2i(x, x_y.y), 0, Vector2i(0, 0), 1)
-		Map.set_cell(Vector2i(x, x_y.y + y_diff), 0, Vector2i(0, 0), 1)
+		Map.set_cell(Vector2i(x, x_y.y), -1, Vector2i(0, 0), 1)
+		Map.set_cell(Vector2i(x, x_y.y + y_diff), -1, Vector2i(0, 0), 1)
 	for y in range(pos1.y, pos2.y, x_diff):
-		Map.set_cell(Vector2i(y_x.x, y), 0, Vector2i(0, 0), 1)
-		Map.set_cell(Vector2i(y_x.x + x_diff, y), 0, Vector2i(0, 0), 1)
+		Map.set_cell(Vector2i(y_x.x, y), -1, Vector2i(0, 0), 1)
+		Map.set_cell(Vector2i(y_x.x + x_diff, y), -1, Vector2i(0, 0), 1)
 	
 func find_start_room():
 	var min_x = INF
