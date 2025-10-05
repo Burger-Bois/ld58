@@ -239,7 +239,7 @@ one_way_collision_margin = 12.1
 
 [node name="CollectionArea" type="Area2D" parent="Ship"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 script = ExtResource("4_j58fr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/CollectionArea"]

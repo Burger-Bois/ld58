@@ -23,6 +23,7 @@ func _ready() -> void:
 	timer.timeout.connect(game_over)
 	add_child(timer)
 	stage_ui.stage_timer = timer
+	SignalBus.player_oxygen_changed.emit((timer.time_left/timer.wait_time) * 100)
 
 	end_menu.main_menu_pressed.connect(finished.emit)
 	pause_menu.main_menu_pressed.connect(finished.emit)
