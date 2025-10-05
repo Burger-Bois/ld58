@@ -24,6 +24,29 @@ unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("2_j58fr")
 
+[node name="MinimapLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinimapLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+
+[node name="Minimap" type="SubViewport" parent="MinimapLayer/SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+canvas_cull_mask = 4294967294
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+script = ExtResource("8_pvnpy")
+
+[node name="MinimapCamera" type="Camera2D" parent="MinimapLayer/SubViewportContainer/Minimap"]
+unique_name_in_owner = true
+visibility_layer = 2
+zoom = Vector2(0.08, 0.08)
+
 [node name="ScreenShaders" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="ScreenShaders"]
@@ -55,26 +78,3 @@ offset_right = 3.0
 stream = ExtResource("7_804oe")
 volume_db = -13.071
 autoplay = true
-
-[node name="MinimapLayer" type="CanvasLayer" parent="."]
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MinimapLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -256.0
-offset_bottom = 256.0
-grow_horizontal = 0
-
-[node name="Minimap" type="SubViewport" parent="MinimapLayer/SubViewportContainer"]
-unique_name_in_owner = true
-handle_input_locally = false
-canvas_cull_mask = 4294967294
-size = Vector2i(256, 256)
-render_target_update_mode = 4
-script = ExtResource("8_pvnpy")
-
-[node name="MinimapCamera" type="Camera2D" parent="MinimapLayer/SubViewportContainer/Minimap"]
-unique_name_in_owner = true
-visibility_layer = 2
-zoom = Vector2(0.08, 0.08)

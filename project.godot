@@ -82,4 +82,4 @@ player_use={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.050079405, 0.027688172, 0.07102113, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -54,10 +54,9 @@ func generate_shape(radius: float) -> void:
 	add_child(collision)
 	
 func push_randomly() -> void:
-	var direction = Vector2(randf_range(0, TAU), randf_range(0, TAU))
-	var rot = randf_range(-PI/4, PI/4)
-	var speed = randf_range(10,25)
-	apply_central_impulse(direction.rotated(rot) * speed)
+	var direction = Vector2.LEFT.rotated(randf_range(0, TAU))
+	var speed = randf_range(80,180)
+	apply_central_impulse(direction * speed)
 
 func calculate_linear_damp(radius: float) -> float:
 	var size := (radius - radius_min) / radius_max

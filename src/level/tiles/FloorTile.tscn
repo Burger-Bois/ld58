@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5g6mhjm26wxs"]
+[gd_scene load_steps=2 format=3 uid="uid://c5g6mhjm26wxs"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_s06x5"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_fgxdo"]
 
 [node name="FloorTile" type="Node2D"]
 
@@ -10,32 +8,3 @@
 modulate = Color(0, 0, 0, 1)
 scale = Vector2(32, 32)
 mesh = SubResource("QuadMesh_s06x5")
-
-[node name="Specs" type="MeshInstance2D" parent="."]
-
-[node name="MeshInstance2D6" type="MeshInstance2D" parent="Specs"]
-modulate = Color(0.2520276, 0.25202766, 0.25202763, 1)
-position = Vector2(4, 5)
-mesh = SubResource("QuadMesh_fgxdo")
-
-[node name="MeshInstance2D5" type="MeshInstance2D" parent="Specs"]
-modulate = Color(0.07, 0.07, 0.07, 1)
-position = Vector2(-12, 9)
-mesh = SubResource("QuadMesh_fgxdo")
-
-[node name="MeshInstance2D4" type="MeshInstance2D" parent="Specs"]
-modulate = Color(0.12, 0.12, 0.12, 1)
-position = Vector2(-2.000001, -7.9999986)
-rotation = 3.1415927
-scale = Vector2(1.6865003, -1.6102219)
-mesh = SubResource("QuadMesh_fgxdo")
-
-[node name="MeshInstance2D3" type="MeshInstance2D" parent="Specs"]
-modulate = Color(0.2520276, 0.25202766, 0.25202763, 1)
-position = Vector2(-13, -14)
-mesh = SubResource("QuadMesh_fgxdo")
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="Specs"]
-modulate = Color(0.13, 0.13, 0.13, 1)
-position = Vector2(12, -5)
-mesh = SubResource("QuadMesh_fgxdo")
