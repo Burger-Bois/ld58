@@ -22,13 +22,20 @@ const DIRECTIONS: Array[Vector2i] = [
 
 var _room: Room
 
-
+@export
 var tile_size = 32
+@export
 var num_rooms = 10
+@export
 var min_size = 10
+@export
 var max_size = 30
+@export
 var hspread = 400
+@export
 var cull = 0.2
+@export
+var corridor_width = 3
 
 var path: AStar2D
 
@@ -189,7 +196,7 @@ func create_room(room: Room) -> void:
 			)
 
 
-func create_corridor(pos_1: Vector2, pos_2: Vector2, width: int = 2):
+func create_corridor(pos_1: Vector2, pos_2: Vector2):
 	var start: Vector2i
 	var end: Vector2i
 	if (randi() % 2) > 0:
@@ -206,12 +213,12 @@ func create_corridor(pos_1: Vector2, pos_2: Vector2, width: int = 2):
 	# choose either x/y or y/x
 	var x_y = start
 	var y_x = end
-	for x in range(start.x, end.x + width * x_diff, x_diff):
-		for y_offset in range(-(width - 1), width):
+	for x in range(start.x, end.x + corridor_width * x_diff, x_diff):
+		for y_offset in range(-(corridor_width - 1), corridor_width):
 			var target_cell := Vector2i(x, x_y.y + y_offset)
 			place_floor(target_cell)
-	for y in range(start.y, end.y + width * y_diff, y_diff):
-		for x_offset in range(-(width - 1), width):
+	for y in range(start.y, end.y + corridor_width * y_diff, y_diff):
+		for x_offset in range(-(corridor_width - 1), corridor_width):
 			var target_cell := Vector2i(y_x.x + x_offset, y)
 			place_floor(target_cell)
 
