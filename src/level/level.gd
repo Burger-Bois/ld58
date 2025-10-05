@@ -1,4 +1,7 @@
+class_name Level
 extends Node2D
+
+signal generated()
 
 const DEBUG := false
 
@@ -44,6 +47,9 @@ func _ready():
 	make_rooms()
 	await get_tree().create_timer(1).timeout
 	make_map()
+	for child in $Rooms.get_children():
+		child.queue_free()
+	generated.emit()
 	
 func make_rooms():
 	for i in range(num_rooms):
@@ -244,3 +250,8 @@ func find_end_room():
 	for room in $Rooms.get_children():
 		if room.position.x > max_x:
 			max_x = room.position.x
+
+
+func random_in_bounds() -> Vector2i:
+	var floor_cells := Map.get_used_cells_by_id(SOURCE_ID, Vector2i(-1, -1), FLOOR_ID)
+	return Map.map_to_local(floor_cells.pick_random())

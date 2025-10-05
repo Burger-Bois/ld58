@@ -5,7 +5,7 @@
 [node name="FloorTile" type="Node2D"]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(0.46618086, 0.4661808, 0.4661808, 1)
+modulate = Color(0, 0, 0, 1)
 position = Vector2(16, 16)
 scale = Vector2(32, 32)
 mesh = SubResource("QuadMesh_s06x5")

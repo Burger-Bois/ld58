@@ -3,8 +3,14 @@ extends Node2D
 
 signal finished()
 
+const LEVEL_SCENE := preload('res://src/level/level.tscn') as PackedScene
+const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
+const ITEM_SCENE := preload('res://src/item/random_item.tscn') as PackedScene
+
 @export
 var end_time: float = 120.0
+@export
+var item_count: int = 32
 
 @onready
 var end_menu: EndMenu = %EndMenu
@@ -15,8 +21,33 @@ var pauser: Pauser = %Pauser
 @onready
 var stage_ui: StageUI = %StageUI
 
+var _level: Level
+
 
 func _ready() -> void:
+	_level = LEVEL_SCENE.instantiate()
+	_level.generated.connect(start)
+	add_child(_level, true)
+
+	end_menu.main_menu_pressed.connect(finished.emit)
+	pause_menu.main_menu_pressed.connect(finished.emit)
+
+
+func start() -> void:
+	var player_spawn_position := _level.random_in_bounds()
+	var player := PLAYER_SCENE.instantiate() as Player
+	player.position = player_spawn_position
+	add_child(player)
+
+	var camera := Camera2D.new()
+	player.add_child(camera)
+
+	for i in range(32):
+		var item_spawn_position := _level.random_in_bounds()
+		var item := ITEM_SCENE.instantiate() as Item
+		item.position = item_spawn_position
+		add_child(item)
+
 	var timer := Timer.new()
 	timer.wait_time = end_time
 	timer.autostart = true
@@ -24,10 +55,6 @@ func _ready() -> void:
 	add_child(timer)
 	stage_ui.stage_timer = timer
 	SignalBus.player_oxygen_changed.emit((timer.time_left/timer.wait_time) * 100)
-
-	end_menu.main_menu_pressed.connect(finished.emit)
-	pause_menu.main_menu_pressed.connect(finished.emit)
-
 
 
 func game_over() -> void:
