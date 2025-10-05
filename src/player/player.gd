@@ -14,6 +14,8 @@ var sprint_speed = default_speed * sprint_multiplier
 var arms: Node2D = %Arms
 @onready
 var grab_area: Area2D = %GrabArea
+@onready
+var use_box: Area2D = %UseBox
 
 var _speed: float = default_speed
 var _grabbed_object: Item
@@ -60,7 +62,7 @@ func _input(event: InputEvent) -> void:
 			_speed = default_speed
 		else:
 			_speed = sprint_speed
-		
+	
 	if event.is_action('player_grab'):
 		if event.is_pressed():
 			arms.show()
@@ -71,6 +73,11 @@ func _input(event: InputEvent) -> void:
 		else:
 			arms.hide()
 			_release()
+	
+	if event.is_action('player_use') and event.is_pressed():
+		var usables := use_box.get_overlapping_areas()
+		if not usables.is_empty():
+			usables[0].press()
 
 
 func _grab(object: RigidBody2D) -> void:
