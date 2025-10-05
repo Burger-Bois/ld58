@@ -16,13 +16,22 @@ var damping_min: float = 0.2
 @export
 var damping_max: float = 1.0
 
+var points: int
 
 func _init() -> void:
 	var radius := randf_range(radius_min, radius_max)
 	generate_shape(radius)
 	push_randomly()
 	mass = radius
+	points = calcuate_points(mass)
 	linear_damp = calculate_linear_damp(radius)
+
+func calcuate_points(mass: float) -> int:
+	var min = 1
+	var points = int(mass / 20)
+	if (points < min):
+		return min
+	return points
 	
 func generate_polygon_points(vertex_count : int, radius : float) -> PackedVector2Array:
 	var points : PackedVector2Array = []

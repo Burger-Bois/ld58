@@ -21,10 +21,10 @@ func on_body_exit(_body: Node2D) -> void:
 		resume_oxygen_timer()
 	
 func collect_item(_item: Item) -> void:
-	_collected += 1
+	_collected += _item.points
 
 func lose_item(_item: Item) -> void:
-	_collected += -1
+	_collected += -_item.points
 
 func _set_collected(new_collected: int) -> void:
 	_collected = new_collected
