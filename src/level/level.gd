@@ -2,6 +2,22 @@ extends Node2D
 
 const DEBUG := false
 
+const SOURCE_ID = 0
+
+const WALL_ID := 1
+const FLOOR_ID := 2
+
+const DIRECTIONS: Array[Vector2i] = [
+	Vector2i(1, 0),
+	Vector2i(1, 1),
+	Vector2i(0, 1),
+	Vector2i(-1, 1),
+	Vector2i(-1, 0),
+	Vector2i(-1, -1),
+	Vector2i(0, -1),
+	Vector2i(1, -1),
+]
+
 @onready var Map: TileMapLayer = $TileMapLayer
 
 var _room: Room
@@ -99,24 +115,24 @@ func make_map():
 	#find_end_room()
 	
 	# Fill TileMap with walls, then carve empty rooms
-	var full_rect = Rect2()
-	for room in $Rooms.get_children():
-		var r = Rect2(
-			room.position-room.size,
-			room.get_child(0).get_shape().extents*2
-		)
-		full_rect = full_rect.merge(r)
-	var topleft = Map.local_to_map(full_rect.position)
-	var bottomright = Map.local_to_map(full_rect.end)
-	for x in range(topleft.x, bottomright.x):
-		for y in range(topleft.y, bottomright.y):
-			Map.set_cell(Vector2i(x, y), 0, Vector2i(0, 0), 1)
+	# var full_rect = Rect2()
+	# for room in $Rooms.get_children():
+	# 	var r = Rect2(
+	# 		room.position-room.size,
+	# 		room.get_child(0).get_shape().extents*2
+	# 	)
+	# 	full_rect = full_rect.merge(r)
+	# var topleft = Map.local_to_map(full_rect.position)
+	# var bottomright = Map.local_to_map(full_rect.end)
+	# for x in range(topleft.x, bottomright.x):
+	# 	for y in range(topleft.y, bottomright.y):
+	# 		Map.set_cell(Vector2i(x, y), 0, Vector2i(0, 0), 1)
 	
-	# Carve rooms
+	# Create rooms
 	for room in $Rooms.get_children():
 		create_room(room)
 	
-	# Carve corridors
+	# Create corridors
 	var corridors = []  # One corridor per connection
 	for start_point_id in path.get_point_ids():
 		for end_point_id in path.get_point_connections(start_point_id):
@@ -129,16 +145,59 @@ func make_map():
 
 
 func create_room(room: Room) -> void:
-	var s = (room.size / tile_size).floor()
-	var ul = (room.position / tile_size).floor() - s
-	for x in range(2, s.x * 2 - 1):
-		for y in range(2, s.y * 2 - 1):
-			Map.set_cell(Vector2i(ul.x + x, ul.y + y), -1, Vector2i(0, 0), 1)
+	var size := Vector2i((room.size / tile_size).floor())
+	var upper_left := Vector2i((room.position / tile_size).floor()) - size
+	# North wall
+	for x in range(size.x * 2):
+		Map.set_cell(
+			upper_left + Vector2i(x, 0),
+			SOURCE_ID,
+			Vector2i(0, 0),
+			WALL_ID
+		)
+	# South wall
+	for x in range(size.x * 2):
+		Map.set_cell(
+			upper_left + Vector2i(x, size.y * 2 - 1),
+			SOURCE_ID,
+			Vector2i(0, 0),
+			WALL_ID
+		)
+	# West wall
+	for y in range(size.y * 2):
+		Map.set_cell(
+			upper_left + Vector2i(0, y),
+			SOURCE_ID,
+			Vector2i(0, 0),
+			WALL_ID
+		)
+	# East wall
+	for y in range(size.y * 2):
+		Map.set_cell(
+			upper_left + Vector2i(size.x * 2 - 1, y),
+			SOURCE_ID,
+			Vector2i(0, 0),
+			WALL_ID
+		)
+	for x in range(upper_left.x + 1, (upper_left.x + size.x * 2) - 1):
+		for y in range(upper_left.y + 1, (upper_left.y + size.y * 2) - 1):
+			Map.set_cell(
+				Vector2i(x, y),
+				SOURCE_ID,
+				Vector2i(0, 0),
+				FLOOR_ID,
+			)
 
 
-func create_corridor(start_pos: Vector2, end_pos: Vector2):
-	var start := Map.local_to_map(start_pos)
-	var end := Map.local_to_map(end_pos)
+func create_corridor(pos_1: Vector2, pos_2: Vector2):
+	var start: Vector2i
+	var end: Vector2i
+	if (randi() % 2) > 0:
+		start = Map.local_to_map(pos_1)
+		end = Map.local_to_map(pos_2)
+	else:
+		start = Map.local_to_map(pos_2)
+		end = Map.local_to_map(pos_1)
 	# Carve a path between two points
 	var x_diff = sign(end.x - start.x)
 	var y_diff = sign(end.y - start.y)
@@ -147,15 +206,22 @@ func create_corridor(start_pos: Vector2, end_pos: Vector2):
 	# choose either x/y or y/x
 	var x_y = start
 	var y_x = end
-	if (randi() % 2) > 0:
-		x_y = end
-		y_x = start
-	for x in range(start.x, end.x, x_diff):
-		Map.set_cell(Vector2i(x, x_y.y), -1, Vector2i(0, 0), 1)
-		Map.set_cell(Vector2i(x, x_y.y + y_diff), -1, Vector2i(0, 0), 1)
-	for y in range(start.y, end.y, y_diff):
-		Map.set_cell(Vector2i(y_x.x, y), -1, Vector2i(0, 0), 1)
-		Map.set_cell(Vector2i(y_x.x + x_diff, y), -1, Vector2i(0, 0), 1)
+	for x in range(start.x, end.x + (1 * x_diff), x_diff):
+		var target_cell := Vector2i(x, x_y.y)
+		Map.set_cell(target_cell, SOURCE_ID, Vector2i(0, 0), FLOOR_ID)
+		for direction in DIRECTIONS:
+			var adjacent_cell := target_cell + direction
+			var adjacent_cell_id := Map.get_cell_source_id(adjacent_cell)
+			if adjacent_cell_id == -1:
+				Map.set_cell(adjacent_cell, SOURCE_ID, Vector2i(0, 0), WALL_ID)
+	for y in range(start.y, end.y + (1 * y_diff), y_diff):
+		var target_cell := Vector2i(y_x.x, y)
+		Map.set_cell(target_cell, SOURCE_ID, Vector2i(0, 0), FLOOR_ID)
+		for direction in DIRECTIONS:
+			var adjacent_cell := target_cell + direction
+			var adjacent_cell_id := Map.get_cell_source_id(adjacent_cell)
+			if adjacent_cell_id == -1:
+				Map.set_cell(adjacent_cell, SOURCE_ID, Vector2i(0, 0), WALL_ID)
 
 
 func find_start_room():
