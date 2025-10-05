@@ -1,6 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://da8dal8mtaoco"]
+[gd_scene load_steps=20 format=3 uid="uid://da8dal8mtaoco"]
 
 [ext_resource type="Script" uid="uid://cqfkvfq1uyusx" path="res://src/ui/main_menu.gd" id="1_qkuje"]
+[ext_resource type="Texture2D" uid="uid://cytlr7b6f88c1" path="res://src/assets/title/S1.png" id="2_vob5f"]
+[ext_resource type="Texture2D" uid="uid://t0tt26weu77m" path="res://src/assets/title/H1.png" id="3_0prml"]
+[ext_resource type="Texture2D" uid="uid://05sw6j7pb0ur" path="res://src/assets/title/I.png" id="4_yipxn"]
+[ext_resource type="Texture2D" uid="uid://tltult5cmri6" path="res://src/assets/title/P1.png" id="5_mxqo5"]
+[ext_resource type="Texture2D" uid="uid://dm7ntoa7cx0rr" path="res://src/assets/title/S2.png" id="6_wdmux"]
+[ext_resource type="Texture2D" uid="uid://5s85ppgkafsn" path="res://src/assets/title/H2.png" id="7_4fdh4"]
+[ext_resource type="Texture2D" uid="uid://ig3svd6vhoc" path="res://src/assets/title/A.png" id="8_kabri"]
+[ext_resource type="Texture2D" uid="uid://ceyia8bwey65f" path="res://src/assets/title/P2.png" id="9_rbrv2"]
+[ext_resource type="Texture2D" uid="uid://b5h4f6rvqdggl" path="res://src/assets/title/E.png" id="10_fnoj8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vob5f"]
+size = Vector2(55.5, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0prml"]
+size = Vector2(90, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yipxn"]
+size = Vector2(44, 102)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxqo5"]
+size = Vector2(56, 117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdmux"]
+size = Vector2(58, 106)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fdh4"]
+size = Vector2(90, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kabri"]
+size = Vector2(80, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbrv2"]
+size = Vector2(59.5, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnoj8"]
+size = Vector2(58, 112)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,14 +52,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -263.0
+offset_right = 263.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+localize_numeral_system = false
 alignment = 1
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Ship Shape"
@@ -33,3 +73,138 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "Start"
+
+[node name="S1" type="RigidBody2D" parent="."]
+
+[node name="S_Shipshape" type="TextureRect" parent="S1"]
+offset_left = 119.0
+offset_top = 78.0
+offset_right = 295.0
+offset_bottom = 384.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vob5f")
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="S1"]
+position = Vector2(164, 146)
+shape = SubResource("RectangleShape2D_vob5f")
+
+[node name="H1" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="H1"]
+position = Vector2(271, 146)
+shape = SubResource("RectangleShape2D_0prml")
+
+[node name="H_Shipshape" type="TextureRect" parent="H1"]
+offset_left = 217.0
+offset_top = 78.0
+offset_right = 443.0
+offset_bottom = 384.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_0prml")
+stretch_mode = 2
+
+[node name="I1" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="I1"]
+position = Vector2(371, 149)
+shape = SubResource("RectangleShape2D_yipxn")
+
+[node name="I_Shipshape" type="TextureRect" parent="I1"]
+offset_left = 346.0
+offset_top = 94.0
+offset_right = 444.0
+offset_bottom = 400.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_yipxn")
+stretch_mode = 2
+
+[node name="P1" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1"]
+position = Vector2(444, 148.5)
+shape = SubResource("RectangleShape2D_mxqo5")
+
+[node name="P_Shipshape" type="TextureRect" parent="P1"]
+offset_left = 404.0
+offset_top = 69.0
+offset_right = 600.0
+offset_bottom = 375.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_mxqo5")
+stretch_mode = 2
+
+[node name="S2" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="S2"]
+position = Vector2(556, 157)
+shape = SubResource("RectangleShape2D_wdmux")
+
+[node name="S_Shipshape2" type="TextureRect" parent="S2"]
+offset_left = 515.0
+offset_top = 94.0
+offset_right = 677.0
+offset_bottom = 400.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_wdmux")
+stretch_mode = 2
+
+[node name="H2" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="H2"]
+position = Vector2(667, 146)
+shape = SubResource("RectangleShape2D_4fdh4")
+
+[node name="H_Shipshape2" type="TextureRect" parent="H2"]
+offset_left = 608.0
+offset_top = 78.0
+offset_right = 834.0
+offset_bottom = 384.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_4fdh4")
+stretch_mode = 2
+
+[node name="A1" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="A1"]
+position = Vector2(794, 157)
+shape = SubResource("RectangleShape2D_kabri")
+
+[node name="A_Shipshape" type="TextureRect" parent="A1"]
+offset_left = 736.0
+offset_top = 78.0
+offset_right = 962.0
+offset_bottom = 384.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_kabri")
+stretch_mode = 2
+
+[node name="P2" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P2"]
+position = Vector2(896.25, 159)
+shape = SubResource("RectangleShape2D_rbrv2")
+
+[node name="P_Shipshape2" type="TextureRect" parent="P2"]
+offset_left = 852.0
+offset_top = 78.0
+offset_right = 1038.0
+offset_bottom = 384.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_rbrv2")
+stretch_mode = 2
+
+[node name="E1" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="E1"]
+position = Vector2(992, 159)
+shape = SubResource("RectangleShape2D_fnoj8")
+
+[node name="E_Shipshape" type="TextureRect" parent="E1"]
+offset_left = 957.0
+offset_top = 94.0
+offset_right = 1107.0
+offset_bottom = 400.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_fnoj8")
+stretch_mode = 2
