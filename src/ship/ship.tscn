@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://cqi7qxlttuvwa"]
+[gd_scene load_steps=5 format=4 uid="uid://cqi7qxlttuvwa"]
 
-[ext_resource type="Script" path="res://src/ship/ship.gd" id="1_kkffy"]
+[ext_resource type="Script" uid="uid://ncnsgnqh8bl1" path="res://src/ship/ship.gd" id="1_kkffy"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_qhocr"]
 [ext_resource type="Script" uid="uid://c24gixp7b8hex" path="res://src/ship/collection_area.gd" id="2_kkffy"]
+[ext_resource type="PackedScene" uid="uid://5tfdopmswn84" path="res://src/ship/button_2d.tscn" id="4_a5wj4"]
 
 [node name="Ship" type="Node2D"]
 script = ExtResource("1_kkffy")
@@ -22,3 +23,11 @@ metadata/_custom_type_script = "uid://c24gixp7b8hex"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollectionArea"]
 visible = false
 polygon = PackedVector2Array(117, -140, 116, 177, -52, 180, -52, 269, -177, 270, -176, 401, -653, 404, -655, 209, -911, 210, -908, -179, -655, -178, -654, -371, -176, -368, -176, -244, -51, -243, -50, -150)
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-224, 0)
+
+[node name="LeaveButton" parent="." instance=ExtResource("4_a5wj4")]
+unique_name_in_owner = true
+position = Vector2(-96, -144)

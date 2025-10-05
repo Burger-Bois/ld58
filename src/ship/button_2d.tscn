@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://5tfdopmswn84"]
+
+[ext_resource type="Script" uid="uid://bt1bx224w4jb2" path="res://src/ship/button_2d.gd" id="1_om75y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gjx8a"]
+radius = 64.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_j3nv5"]
+size = Vector3(32, 32, 1)
+
+[node name="Button2D" type="Area2D"]
+collision_layer = 16
+script = ExtResource("1_om75y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gjx8a")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 8)
+scale = Vector2(1, 0.5)
+mesh = SubResource("BoxMesh_j3nv5")

@@ -2,6 +2,7 @@ class_name Stage
 extends Node2D
 
 signal finished()
+signal completed()
 
 const LEVEL_SCENE := preload('res://src/level/level.tscn') as PackedScene
 const SHIP_SCENE := preload('res://src/ship/ship.tscn') as PackedScene
@@ -39,6 +40,7 @@ func start() -> void:
 	var ship_spawn_location := _level.docking_position()
 	var ship := SHIP_SCENE.instantiate() as Ship
 	ship.position = ship_spawn_location
+	ship.leave_pressed.connect(completed.emit)
 	add_child(ship)
 
 	var player := PLAYER_SCENE.instantiate() as Player

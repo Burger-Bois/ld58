@@ -13,13 +13,17 @@ func _ready() -> void:
 
 
 func start() -> void:
+	end()
 	main_menu.hide()
 	_stage = stage_scene.instantiate()
 	_stage.finished.connect(end)
+	_stage.completed.connect(start)
 	add_child(_stage)
 
 
 func end() -> void:
-	_stage.queue_free()
+	if is_instance_valid(_stage):
+		_stage.process_mode = Node.PROCESS_MODE_DISABLED
+		_stage.queue_free()
 	main_menu.show()
 	get_tree().paused = false
