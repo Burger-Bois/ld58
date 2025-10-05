@@ -235,12 +235,10 @@ shape = SubResource("RectangleShape2D_itwdx")
 
 [node name="RandomItem" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(291, 63)
-mass = 20.0
 linear_damp = 0.5
 
 [node name="RandomItem2" parent="." instance=ExtResource("3_78rax")]
 position = Vector2(593, 80)
-mass = 100.0
 linear_damp = 1.0
 
 [node name="RandomItem3" parent="." instance=ExtResource("3_78rax")]

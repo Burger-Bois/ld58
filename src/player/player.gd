@@ -16,11 +16,17 @@ var arms: Node2D = %Arms
 var grab_area: Area2D = %GrabArea
 
 var _speed: float = default_speed
-var _grabbed_object: Object
+var _grabbed_object: Item
 var _object_collision_shapes: Array[CollisionPolygon2D] = []
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	var weight_multiplier: float
+	if is_instance_valid(_grabbed_object):
+		weight_multiplier = min(1 / (_grabbed_object.mass / 50), 1)
+	else:
+		weight_multiplier = 1
+
 	# Move
 	var direction := Input.get_vector(
 		'player_move_left',
@@ -28,12 +34,17 @@ func _physics_process(_delta: float) -> void:
 		'player_move_up',
 		'player_move_down',
 	).normalized()
-	velocity = direction * _speed
+	velocity = direction * _speed * weight_multiplier
 	move_and_slide()
 
 	# Look at mouse
-	var mouse_position := get_global_mouse_position()
-	look_at(mouse_position)
+	if not is_instance_valid(_grabbed_object):
+		var mouse_position := get_global_mouse_position()
+		look_at(mouse_position)
+	else:
+		var rotate_speed := TAU * weight_multiplier
+		var target_rotation := global_position.direction_to(get_global_mouse_position()).angle()
+		rotation = lerp_angle(global_rotation, target_rotation, rotate_speed * delta)
 
 	# Push objects
 	for i in range(get_slide_collision_count()):
