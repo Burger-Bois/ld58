@@ -4,8 +4,10 @@ extends Node2D
 signal finished()
 
 const LEVEL_SCENE := preload('res://src/level/level.tscn') as PackedScene
+const SHIP_SCENE := preload('res://src/ship/ship.tscn') as PackedScene
 const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
 const ITEM_SCENE := preload('res://src/item/random_item.tscn') as PackedScene
+
 
 @export
 var end_time: float = 120.0
@@ -34,9 +36,13 @@ func _ready() -> void:
 
 
 func start() -> void:
-	var player_spawn_position := _level.random_in_bounds()
+	var ship_spawn_location := _level.docking_position()
+	var ship := SHIP_SCENE.instantiate() as Ship
+	ship.position = ship_spawn_location
+	add_child(ship)
+
 	var player := PLAYER_SCENE.instantiate() as Player
-	player.position = player_spawn_position
+	player.position = ship_spawn_location
 	add_child(player)
 
 	var camera := Camera2D.new()

@@ -255,3 +255,21 @@ func find_end_room():
 func random_in_bounds() -> Vector2i:
 	var floor_cells := Map.get_used_cells_by_id(SOURCE_ID, Vector2i(-1, -1), FLOOR_ID)
 	return Map.map_to_local(floor_cells.pick_random())
+
+
+func docking_position() -> Vector2:
+	var used_rect := Map.get_used_rect()
+	var top_left := used_rect.position
+	var walls := [] as Array[Vector2i]
+	for y in range(used_rect.position.y, used_rect.end.y + 1):
+		var coords := Vector2i(top_left.x, y)
+		var source_id := Map.get_cell_source_id(coords)
+		var tile_id := Map.get_cell_alternative_tile(Vector2i(top_left.x, y))
+		if source_id == SOURCE_ID and tile_id == WALL_ID:
+			walls.append(coords)
+	@warning_ignore("integer_division")
+	var centre_coords := walls[int(walls.size() / 2)]
+	# Delete docking walls
+	for y in range(centre_coords.y - 3, centre_coords.y + 3):
+		Map.set_cell(Vector2i(top_left.x, y), SOURCE_ID, Vector2i(0, 0), FLOOR_ID)
+	return Map.map_to_local(centre_coords)
