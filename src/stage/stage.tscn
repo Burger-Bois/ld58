@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=9 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="Script" uid="uid://drr3evi0hcxu" path="res://src/stage/stage.gd" id="1_804oe"]
 [ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
 [ext_resource type="PackedScene" uid="uid://c2aysul8xes3t" path="res://src/ui/pause_menu.tscn" id="3_43xs6"]
 [ext_resource type="PackedScene" uid="uid://coq3q4mphg2ms" path="res://src/ui/stage_ui.tscn" id="3_y8ixn"]
 [ext_resource type="PackedScene" uid="uid://bryos5qedcjd1" path="res://src/ui/end_menu.tscn" id="5_pvnpy"]
+[ext_resource type="AudioStream" uid="uid://cxcvtton1exu7" path="res://src/assets/ShipShape.mp3" id="7_804oe"]
 [ext_resource type="Shader" uid="uid://880t7aps3sjm" path="res://src/stage/neon.gdshader" id="9_puyty"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_puyty"]
@@ -48,3 +49,8 @@ process_mode = 2
 visible = false
 offset_left = 3.0
 offset_right = 3.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_804oe")
+volume_db = -13.071
+autoplay = true
