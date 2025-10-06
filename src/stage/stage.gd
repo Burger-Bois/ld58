@@ -95,6 +95,12 @@ func start_level() -> void:
 			item.reparent(_level)
 			item.freeze = false
 
+	_player.update_oxygen(-10000000)
+	if _level is RandomLevel:
+		_player.infinite_oxygen = false
+	elif _level is HubLevel:
+		_player.infinite_oxygen = true
+
 	# Start game
 	_state = State.PLAYING
 

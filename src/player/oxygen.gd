@@ -1,6 +1,9 @@
 class_name Oxygen extends Node
 
-var _value: float = 100.0
+@export
+var value_max: float = 100.0
+
+var _value: float = 100.0: set=_set_value
 
 var oxygen_paused: bool = true
 
@@ -17,3 +20,7 @@ func reduce_oxygen(minus: float) -> void:
 
 func _handle_oxygen_pause(is_paused: bool) -> void:
 	oxygen_paused = is_paused
+
+
+func _set_value(new_value) -> void:
+	_value = clamp(new_value, 0, value_max)

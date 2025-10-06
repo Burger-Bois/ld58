@@ -22,6 +22,7 @@ var _object_collision_shapes: Array[CollisionPolygon2D] = []
 
 var is_sprinting: bool = false
 var sprint_speed: float = default_speed * multiplier
+var infinite_oxygen: bool = false
 
 
 func _physics_process(delta: float) -> void:
@@ -61,6 +62,8 @@ func _physics_process(delta: float) -> void:
 	
 
 func update_oxygen(minus: float) -> void:
+	if infinite_oxygen:
+		return
 	if is_sprinting:
 		_oxygen.reduce_oxygen(minus * multiplier)
 	else:
