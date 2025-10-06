@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dj7ajwpb3ro24"]
+
+[node name="FinalChest" type="Node2D"]
+scale = Vector2(20, 20)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Control"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Control/StaticBody2D"]
+polygon = PackedVector2Array(0, 0, 10, 0, 10.999999, 3.5499997, 10, 7, 0, 7, -0.99999994, 3.4999998)
+
+[node name="Chest" type="Polygon2D" parent="Control/StaticBody2D"]
+color = Color(0.47, 0.38383332, 0, 1)
+polygon = PackedVector2Array(0, 0, -0.99999994, 3.5499997, 0, 7, 5, 7, 10, 7, 10.999999, 3.6, 10, 0, 5, 0, 0, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="Control/StaticBody2D/Chest"]
+position = Vector2(3, 2.25)
+scale = Vector2(1, 1.25)
+color = Color(0.12568241, 0.108991735, 0.007624242, 1)
+polygon = PackedVector2Array(-2, -1, -2, 3, 2, 3, 6, 3, 6, 2, 6, -1, 2, -1)
+
+[node name="Key" type="Polygon2D" parent="Control/StaticBody2D"]
+position = Vector2(5, 3)
+color = Color(0.8257369, 0.6358587, 0.099056505, 1)
+polygon = PackedVector2Array(2, 1, 1, 1, 1, 2, 0, 2, 0, 1, -1, 1, -1, 2, -2, 2, -3, 2, -3, -1, -1, -1, -1, 0, 3, 0, 3, 2, 2, 2, 2, 1)
+
+[node name="Line2D" type="Line2D" parent="Control/StaticBody2D/Key"]
+points = PackedVector2Array(-2, 0, -2, 1)
+closed = true
+width = 1.0

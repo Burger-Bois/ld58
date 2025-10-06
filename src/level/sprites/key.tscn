@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cr8k0lka2qpgn"]
+
+[node name="Key" type="StaticBody2D"]
+scale = Vector2(10, 10)
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 1, 6, 1, 6, 3, 5, 3, 5, 2, 4, 2, 4, 3, 3, 3, 3, 2, 2, 2, 2, 3, 0, 3)
+
+[node name="Key" type="Polygon2D" parent="."]
+position = Vector2(3, 1)
+color = Color(0.8257369, 0.6358587, 0.099056505, 1)
+polygon = PackedVector2Array(2, 1, 1, 1, 1, 2, 0, 2, 0, 1, -1, 1, -1, 2, -2, 2, -3, 2, -3, -1, -1, -1, -1, 0, 3, 0, 3, 2, 2, 2, 2, 1)
+
+[node name="Line2D" type="Line2D" parent="Key"]
+points = PackedVector2Array(-2, 0, -1.9999999, 0.47374463, -2, 1, -2, 1, -2, 1)
+closed = true
+width = 1.0
