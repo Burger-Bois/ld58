@@ -9,6 +9,7 @@ const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
 const RED_ITEM_SCENE := preload('res://src/item/red_item.tscn') as PackedScene
 const YELLOW_ITEM_SCENE := preload('res://src/item/yellow_item.tscn') as PackedScene
 const BLUE_ITEM_SCENE := preload('res://src/item/blue_item.tscn') as PackedScene
+const TRASH_ITEM_SCENE := preload('res://src/item/trash_item.tscn') as PackedScene
 
 
 @export
@@ -122,14 +123,17 @@ func set_state(new_state: State) -> void:
 
 
 func getNewItem() -> Item:
-	var i = randi_range(0, 2)
-	if i == 0:
+	var i = randi_range(1, 100)
+	if i <= 20:
 		return YELLOW_ITEM_SCENE.instantiate()
 		
-	if i == 1:
+	if i > 20 and i <= 40:
 		return RED_ITEM_SCENE.instantiate()
+		
+	if i > 40 and i <= 60:
+		return BLUE_ITEM_SCENE.instantiate()
 	
-	return BLUE_ITEM_SCENE.instantiate()
+	return TRASH_ITEM_SCENE.instantiate()
 
 
 func _game_over() -> void:
