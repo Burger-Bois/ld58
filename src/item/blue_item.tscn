@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://7sstqgji2g80"]
+
+[ext_resource type="Script" uid="uid://cfvn3ybq34cw" path="res://src/item/blue_item.gd" id="1_pdt35"]
+
+[node name="PurpleItem" type="RigidBody2D"]
+modulate = Color(0.5137255, 0.3372549, 1, 1)
+position = Vector2(1, 0)
+collision_layer = 4
+collision_mask = 7
+freeze_mode = 1
+continuous_cd = 1
+script = ExtResource("1_pdt35")

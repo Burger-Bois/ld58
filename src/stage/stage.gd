@@ -7,7 +7,10 @@ signal completed()
 const LEVEL_SCENE := preload('res://src/level/level.tscn') as PackedScene
 const SHIP_SCENE := preload('res://src/ship/ship.tscn') as PackedScene
 const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
-const ITEM_SCENE := preload('res://src/item/random_item.tscn') as PackedScene
+const RED_ITEM_SCENE := preload('res://src/item/red_item.tscn') as PackedScene
+const YELLOW_ITEM_SCENE := preload('res://src/item/yellow_item.tscn') as PackedScene
+const BLUE_ITEM_SCENE := preload('res://src/item/blue_item.tscn') as PackedScene
+
 
 @export
 var end_time: float = 120.0
@@ -55,10 +58,19 @@ func start() -> void:
 
 	for i in range(50):
 		var item_spawn_position := _level.random_in_bounds()
-		var item := ITEM_SCENE.instantiate() as Item
+		var item := getNewItem()
 		item.position = item_spawn_position
 		add_child(item)
 
+func getNewItem() -> Item:
+	var i = randi_range(0, 2)
+	if i == 0:
+		return YELLOW_ITEM_SCENE.instantiate()
+		
+	if i == 1:
+		return RED_ITEM_SCENE.instantiate()
+	
+	return BLUE_ITEM_SCENE.instantiate()
 
 func _game_over() -> void:
 	pauser.process_mode = Node.PROCESS_MODE_DISABLED

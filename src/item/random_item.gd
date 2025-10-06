@@ -19,12 +19,15 @@ var damping_max: float = 1.0
 var points: int
 
 func _init() -> void:
+	generate(Color.from_hsv(randf_range(0,1),0.6,1.0))
+
+func generate(color: Color) -> void:
 	var radius := randf_range(radius_min, radius_max)
 	generate_shape(radius)
 	mass = radius
 	points = calcuate_points(mass)
 	#linear_damp = calculate_linear_damp(radius)
-	modulate = Color.from_hsv(randf_range(0,1),0.6,1.0)
+	modulate = color
 	push_randomly()
 
 func calcuate_points(itemMass: float) -> int:
