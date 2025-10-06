@@ -118,11 +118,12 @@ func _release() -> void:
 	if is_instance_valid(_grabbed_object):
 		_grabbed_object.freeze = false
 		call_deferred('remove_collision_exception_with', _grabbed_object)
-		# Remove object collision shapes from player
-		for object_collision_shape in _object_collision_shapes:
-			for child in object_collision_shape.get_children():
-				if child is RemoteTransform2D:
-					child.remote_path = child.get_path()
-			object_collision_shape.queue_free()
-		_object_collision_shapes = []
-		_grabbed_object = null
+
+	# Remove object collision shapes from player
+	for object_collision_shape in _object_collision_shapes:
+		for child in object_collision_shape.get_children():
+			if child is RemoteTransform2D:
+				child.remote_path = child.get_path()
+		object_collision_shape.queue_free()
+	_object_collision_shapes = []
+	_grabbed_object = null
