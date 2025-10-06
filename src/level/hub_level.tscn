@@ -185,7 +185,7 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "0"
 
-[node name="BlueTradeArea" parent="." instance=ExtResource("3_7htcs")]
+[node name="BlueTradeArea" parent="." groups=["trade_areas"] instance=ExtResource("3_7htcs")]
 unique_name_in_owner = true
 position = Vector2(1432, 576)
 reward_scene = ExtResource("5_0lo7e")
@@ -274,7 +274,7 @@ for upgrades in the hub"
 horizontal_alignment = 1
 
 [node name="Tutorial1Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 autostart = true
 
@@ -301,10 +301,12 @@ you leave will be destroyed"
 horizontal_alignment = 1
 
 [node name="Tutorial2Timer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 16.0
 one_shot = true
 autostart = true
 
 [connection signal="amount_changed" from="RedTradeArea" to="RedTradeArea/RedScore" method="update_value"]
+[connection signal="amount_changed" from="YellowTradeArea" to="YellowTradeArea/YellowScore" method="update_value"]
+[connection signal="amount_changed" from="BlueTradeArea" to="BlueTradeArea/BlueScore" method="update_value"]
 [connection signal="timeout" from="Tutorial1Timer" to="Tutorial1" method="hide"]
 [connection signal="timeout" from="Tutorial2Timer" to="Tutorial2" method="hide"]
