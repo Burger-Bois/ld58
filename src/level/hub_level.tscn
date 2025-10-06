@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dnxynr0dyi4wx"]
+[gd_scene load_steps=22 format=4 uid="uid://dnxynr0dyi4wx"]
 
 [ext_resource type="Script" uid="uid://cdvgquvmmi17o" path="res://src/level/hub_level.gd" id="1_1cd0q"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_m1ayx"]
@@ -7,15 +7,66 @@
 [ext_resource type="PackedScene" uid="uid://b5deoxsaq2udf" path="res://src/item/oxygen_upgrade.tscn" id="5_0lo7e"]
 [ext_resource type="PackedScene" uid="uid://48rxnkqu317l" path="res://src/item/strength_upgrade.tscn" id="6_af6iu"]
 [ext_resource type="PackedScene" uid="uid://bh1qnfsonoqa0" path="res://src/item/speed_upgrade.tscn" id="6_bo1g2"]
+[ext_resource type="Script" uid="uid://5uonvntkao1f" path="res://src/ship/red_score.gd" id="6_gbyyv"]
+[ext_resource type="Script" uid="uid://b4cja1w2vaxfm" path="res://src/ship/yellow_score.gd" id="8_ahbiw"]
+[ext_resource type="Script" uid="uid://bcs4lc5krskg4" path="res://src/ship/blue_score.gd" id="10_k48xh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0lo7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fol3d"]
 size = Vector2(608, 528)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7071k"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahbiw"]
+bg_color = Color(0.688359, 0, 0.12760904, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_fol3d"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k48xh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xg0n8"]
+bg_color = Color(0.8398242, 0.7596881, 0.012155132, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_7htcs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sa5vj"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dkd5"]
+bg_color = Color(0.07058824, 0.23921569, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_af6iu"]
 
@@ -62,6 +113,32 @@ visibility_layer = 3
 shape = SubResource("RectangleShape2D_fol3d")
 metadata/_edit_lock_ = true
 
+[node name="RedScore" type="ProgressBar" parent="RedTradeArea"]
+modulate = Color(1, 1, 1, 0.3254902)
+custom_minimum_size = Vector2(0, 22)
+offset_left = -312.0
+offset_top = -232.0
+offset_right = 184.13037
+offset_bottom = -210.0
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/outline_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_7071k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ahbiw")
+max_value = 20.0
+step = 1.0
+value = 15.0
+show_percentage = false
+script = ExtResource("6_gbyyv")
+
+[node name="RedScoreLabel" type="Label" parent="RedTradeArea/RedScore"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 158.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
+
 [node name="YellowTradeArea" parent="." groups=["trade_areas"] instance=ExtResource("3_7htcs")]
 unique_name_in_owner = true
 position = Vector2(1432, 0)
@@ -81,6 +158,32 @@ visible = false
 visibility_layer = 3
 shape = SubResource("RectangleShape2D_fol3d")
 metadata/_edit_lock_ = true
+
+[node name="YellowScore" type="ProgressBar" parent="YellowTradeArea"]
+modulate = Color(1, 1, 1, 0.3254902)
+custom_minimum_size = Vector2(0, 22)
+offset_left = -312.0
+offset_top = -264.0
+offset_right = 215.95264
+offset_bottom = -242.0
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/outline_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_k48xh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xg0n8")
+max_value = 20.0
+step = 1.0
+value = 15.0
+show_percentage = false
+script = ExtResource("8_ahbiw")
+
+[node name="YellowScoreLabel" type="Label" parent="YellowTradeArea/YellowScore"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 158.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
 
 [node name="BlueTradeArea" parent="." instance=ExtResource("3_7htcs")]
 unique_name_in_owner = true
@@ -102,6 +205,32 @@ visibility_layer = 3
 shape = SubResource("RectangleShape2D_fol3d")
 metadata/_edit_lock_ = true
 
+[node name="BlueScore" type="ProgressBar" parent="BlueTradeArea"]
+modulate = Color(1, 1, 1, 0.19215687)
+custom_minimum_size = Vector2(0, 22)
+offset_left = -312.0
+offset_top = -264.0
+offset_right = 184.1001
+offset_bottom = -242.0
+rotation = 1.5707964
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/outline_size = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_sa5vj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2dkd5")
+max_value = 20.0
+step = 1.0
+value = 15.0
+show_percentage = false
+script = ExtResource("10_k48xh")
+
+[node name="BlueScoreLabel" type="Label" parent="BlueTradeArea/BlueScore"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 158.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
+
 [node name="FloorLights" type="Node2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.21568628)
@@ -119,26 +248,63 @@ mesh = SubResource("BoxMesh_af6iu")
 [node name="Polygon2D" type="Polygon2D" parent="FloorLights"]
 modulate = Color(1, 0, 0, 1)
 visibility_layer = 3
-polygon = PackedVector2Array(632, -40, 632, -584, 1128, -584, 1128, -568, 648, -568, 648, -40)
+polygon = PackedVector2Array(632, -40, 632, -584, 1088, -584, 1088, -568, 648, -568, 648, -40)
 
 [node name="Polygon2D2" type="Polygon2D" parent="FloorLights"]
 modulate = Color(1, 1, 0, 1)
 visibility_layer = 3
-polygon = PackedVector2Array(1128, -8, 680, -8, 680, 8, 1128, 8)
+polygon = PackedVector2Array(1088, -8, 680, -8, 680, 8, 1088, 8)
 
 [node name="Polygon2D3" type="Polygon2D" parent="FloorLights"]
 modulate = Color(0, 0, 1, 1)
 visibility_layer = 3
-polygon = PackedVector2Array(1128, 568, 648, 568, 648, 40, 632, 40, 632, 584, 1128, 584)
+polygon = PackedVector2Array(1088, 568, 648, 568, 648, 40, 632, 40, 632, 584, 1088, 584)
 
-[node name="Label2" type="Label" parent="."]
+[node name="Tutorial1" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0.5686275)
 z_index = 1
-offset_left = -704.0
-offset_top = -120.0
-offset_right = -145.0
-offset_bottom = -27.0
+offset_left = -608.0
+offset_top = -136.0
+offset_right = -49.0
+offset_bottom = 5.0
 theme_override_font_sizes/font_size = 32
 text = "Collect red, yellow, and blue
-asteroids and trade them in the hub"
+asteroids and trade them
+for upgrades in the hub"
 horizontal_alignment = 1
+
+[node name="Tutorial1Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Tutorial2" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.5686275)
+offset_left = 416.0
+offset_top = -216.0
+offset_right = 880.0
+offset_bottom = -123.0
+theme_override_font_sizes/font_size = 32
+text = "Get all the upgrades to unlock
+the key and the final level"
+horizontal_alignment = 1
+
+[node name="Tutorial2" type="Label" parent="Tutorial2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 376.0
+offset_right = 472.0
+offset_bottom = 469.0
+theme_override_font_sizes/font_size = 32
+text = "Anything left in the hub when
+you leave will be destroyed"
+horizontal_alignment = 1
+
+[node name="Tutorial2Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[connection signal="amount_changed" from="RedTradeArea" to="RedTradeArea/RedScore" method="update_value"]
+[connection signal="timeout" from="Tutorial1Timer" to="Tutorial1" method="hide"]
+[connection signal="timeout" from="Tutorial2Timer" to="Tutorial2" method="hide"]

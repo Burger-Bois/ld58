@@ -2,6 +2,7 @@ class_name TradeArea
 extends Area2D
 
 signal completed()
+signal amount_changed(value: int)
 
 @export
 var reward_scene: PackedScene
@@ -25,7 +26,6 @@ func collect_item(body: Node2D) -> void:
 		var item := body as RandomItem
 		_current_items.append(item)
 		_current_amount += item.points
-		print('%s: %s' % [name, _current_amount])
 
 
 func lose_item(body: Node2D) -> void:
@@ -33,10 +33,10 @@ func lose_item(body: Node2D) -> void:
 		var item := body as RandomItem
 		_current_items.erase(item)
 		_current_amount += -item.points
-		print('%s: %s' % [name, _current_amount])
 
 
 func _set_current_amount(new_amount: int) -> void:
+	var old_amount := _current_amount
 	_current_amount = new_amount
 	if _current_amount >= cost:
 		completed.emit()
@@ -46,3 +46,4 @@ func _set_current_amount(new_amount: int) -> void:
 		queue_free()
 		for item in _current_items:
 			item.queue_free()
+	amount_changed.emit(new_amount - old_amount)
