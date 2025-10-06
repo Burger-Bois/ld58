@@ -16,6 +16,8 @@ var end_time: float = 120.0
 @onready
 var end_menu: EndMenu = %EndMenu
 @onready
+var win_menu: WinMenu = %WinMenu
+@onready
 var pause_menu: PauseMenu = %PauseMenu
 @onready
 var loading_screen: Control = %LoadingScreen
@@ -42,11 +44,13 @@ var _oxygen_got := false
 
 func _init() -> void:
 	SignalBus.game_over.connect(_game_over)
-
+	SignalBus.game_won.connect(_game_won)
+	
 func _ready() -> void:
 	_state = _state
 
 	end_menu.main_menu_pressed.connect(finished.emit)
+	win_menu.main_menu_pressed.connect(finished.emit)
 	pause_menu.main_menu_pressed.connect(finished.emit)
 
 	_ship = SHIP_SCENE.instantiate() as Ship
@@ -75,6 +79,8 @@ func collect_item(item: Item) -> void:
 		_player.strength_upgraded = true
 		for trash_item: TrashItem in get_tree().get_nodes_in_group('trash_items'):
 			trash_item.linear_damp = 0
+	elif item is EndToken:
+		SignalBus.game_won.emit()
 
 
 func lose_item(item: Item) -> void:
@@ -187,3 +193,9 @@ func _game_over() -> void:
 	pauser.process_mode = Node.PROCESS_MODE_DISABLED
 	get_tree().paused = true
 	end_menu.show()
+	
+
+func _game_won() -> void:
+	pauser.process_mode = Node.PROCESS_MODE_DISABLED
+	get_tree().paused = true
+	win_menu.show()

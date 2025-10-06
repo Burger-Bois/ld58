@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctgo8mssfywbo"]
+[gd_scene load_steps=13 format=3 uid="uid://ctgo8mssfywbo"]
 
 [ext_resource type="Script" uid="uid://drr3evi0hcxu" path="res://src/stage/stage.gd" id="1_804oe"]
 [ext_resource type="Script" uid="uid://b4vo3y4e5uvh1" path="res://src/stage/pauser.gd" id="2_j58fr"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://34pdwllvcl73" path="res://src/ui/loading_screen.tscn" id="8_puyty"]
 [ext_resource type="Script" uid="uid://d4dqr376dcyoj" path="res://src/stage/minimap_viewport.gd" id="8_pvnpy"]
 [ext_resource type="Shader" uid="uid://880t7aps3sjm" path="res://src/stage/neon.gdshader" id="9_puyty"]
+[ext_resource type="PackedScene" uid="uid://bxvl0xgdqv1xk" path="res://src/ui/win_menu.tscn" id="10_paren"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_puyty"]
 shader = ExtResource("9_puyty")
@@ -103,6 +104,11 @@ offset_right = 3.0
 
 [node name="LoadingScreen" parent="UI" instance=ExtResource("8_puyty")]
 unique_name_in_owner = true
+visible = false
+
+[node name="WinMenu" parent="UI" instance=ExtResource("10_paren")]
+unique_name_in_owner = true
+process_mode = 3
 visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

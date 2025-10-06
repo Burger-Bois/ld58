@@ -15,3 +15,5 @@ signal add_to_yellow_score(score: int)
 signal add_to_blue_score(score: int)
 
 signal game_over()
+
+signal game_won()

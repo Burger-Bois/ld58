@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dnxynr0dyi4wx"]
+[gd_scene load_steps=15 format=4 uid="uid://dnxynr0dyi4wx"]
 
 [ext_resource type="Script" uid="uid://cdvgquvmmi17o" path="res://src/level/hub_level.gd" id="1_1cd0q"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_m1ayx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b5deoxsaq2udf" path="res://src/item/oxygen_upgrade.tscn" id="5_0lo7e"]
 [ext_resource type="PackedScene" uid="uid://48rxnkqu317l" path="res://src/item/strength_upgrade.tscn" id="6_af6iu"]
 [ext_resource type="PackedScene" uid="uid://bh1qnfsonoqa0" path="res://src/item/speed_upgrade.tscn" id="6_bo1g2"]
+[ext_resource type="PackedScene" uid="uid://02jkoarohiq2" path="res://src/level/sprites/end_token.tscn" id="8_gbyyv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0lo7e"]
 
@@ -159,3 +160,6 @@ polygon = PackedVector2Array(1128, -8, 672, -8, 672, 8, 1128, 8)
 modulate = Color(0, 0, 1, 1)
 visibility_layer = 3
 polygon = PackedVector2Array(1128, 568, 648, 568, 648, 32, 632, 32, 632, 584, 1128, 584)
+
+[node name="EndToken" parent="." instance=ExtResource("8_gbyyv")]
+position = Vector2(467, 162)
