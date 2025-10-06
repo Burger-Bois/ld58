@@ -28,7 +28,6 @@ var level_holder: Node2D = %Level
 enum State {
 	LOADING,
 	PLAYING,
-	PAUSED,
 }
 var _state: State = State.LOADING: set=set_state
 
@@ -111,18 +110,18 @@ func set_state(new_state: State) -> void:
 	_state = new_state
 	match _state:
 		State.LOADING:
+			pauser.process_mode = Node.PROCESS_MODE_DISABLED
 			if is_instance_valid(_ship):
 				_ship.process_mode = Node.PROCESS_MODE_DISABLED
 			if is_instance_valid(_player):
 				_player.process_mode = Node.PROCESS_MODE_DISABLED
 			loading_screen.show()
 		State.PLAYING:
+			pauser.process_mode = Node.PROCESS_MODE_ALWAYS
 			get_tree().paused = false
 			_ship.process_mode = Node.PROCESS_MODE_PAUSABLE
 			_player.process_mode = Node.PROCESS_MODE_PAUSABLE
 			loading_screen.hide()
-		State.PAUSED:
-			get_tree().paused = true
 
 
 func _game_over() -> void:
