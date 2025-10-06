@@ -18,7 +18,7 @@ var use_box: Area2D = %UseBox
 var _speed: float = default_speed
 var _oxygen: Oxygen = Oxygen.new()
 var _grabbed_object: Item
-var _object_collision_shapes: Array[CollisionPolygon2D] = []
+var _object_collision_shapes: Array[Node2D] = []
 
 var is_sprinting: bool = false
 var sprint_speed: float = default_speed * multiplier
@@ -100,7 +100,7 @@ func _grab(object: RigidBody2D) -> void:
 	object.freeze = true
 	# Add object collision shapes to player
 	for child in object.get_children():
-		if child is CollisionPolygon2D:
+		if child is CollisionPolygon2D or child is CollisionShape2D:
 			var dupe_collision_shape := child.duplicate()
 			add_child(dupe_collision_shape)
 			dupe_collision_shape.global_position = child.global_position

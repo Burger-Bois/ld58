@@ -1,5 +1,5 @@
-class_name Item
-extends RigidBody2D
+class_name RandomItem
+extends Item
 
 const Z_INDEX := 10
 

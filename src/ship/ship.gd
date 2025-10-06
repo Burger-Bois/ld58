@@ -2,6 +2,8 @@ class_name Ship
 extends Node2D
 
 signal leave_pressed()
+signal item_collected(item: Item)
+signal item_lost(item: Item)
 
 @onready
 var leave_button: Button2D = %LeaveButton
@@ -20,8 +22,10 @@ func _ready() -> void:
 func collect_item(body: PhysicsBody2D) -> void:
 	if body is Item:
 		collected_items.append(body)
+		item_collected.emit(body)
 
 
 func lose_item(body: PhysicsBody2D) -> void:
 	if body is Item:
 		collected_items.erase(body)
+		item_lost.emit(body)

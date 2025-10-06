@@ -285,7 +285,7 @@ func spawn_items() -> void:
 		add_child(item)
 
 
-func getNewItem() -> Item:
+func getNewItem() -> RandomItem:
 	var i = randi_range(1, 100)
 	if i <= 20:
 		return YELLOW_ITEM_SCENE.instantiate()
