@@ -11,6 +11,7 @@ const FLOOR_ID := 2
 
 const TRASH_ITEM_SCENE := preload('res://src/item/trash_item.tscn') as PackedScene
 const CHEST_SCENE := preload('res://src/level/sprites/final_chest.tscn') as PackedScene
+const ARTIFACT_SCENE := preload('res://src/level/sprites/end_token.tscn') as PackedScene
 
 
 const DIRECTIONS: Array[Vector2i] = [
@@ -286,6 +287,7 @@ func spawn_items() -> void:
 		
 func spawn_chest() -> void:
 	var item_spawn_position := random_in_bounds()
-	var item := CHEST_SCENE.instantiate()
+	var item := CHEST_SCENE.instantiate() as FinalChest
+	item.artifact_scene = ARTIFACT_SCENE
 	item.position = item_spawn_position
 	add_child(item)

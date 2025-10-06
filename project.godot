@@ -84,6 +84,7 @@ player_use={
 2d_physics/layer_5="buttons"
 2d_physics/layer_6="chest"
 2d_physics/layer_7="key"
+2d_physics/layer_8="end_token"
 2d_physics/layer_24="menu_letters"
 2d_physics/layer_25="level_creation_rooms"
 

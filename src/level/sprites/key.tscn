@@ -27,6 +27,7 @@ polygon = PackedVector2Array(2, 1, 1, 1, 1, 2, 0, 2, 0, 1, -1, 1, -1, 2, -2, 2, 
 points = PackedVector2Array(-2, 0, -1.9999999, 0.47374463, -2, 1, -2, 1, -2, 1)
 closed = true
 width = 1.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yo1ol")

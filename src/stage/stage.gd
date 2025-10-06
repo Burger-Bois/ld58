@@ -4,6 +4,7 @@ extends Node2D
 signal finished()
 
 const LEVEL_SCENE := preload('res://src/level/random_level.tscn') as PackedScene
+const FINAL_LEVEL_SCENE := preload('res://src/level/final_level.tscn') as PackedScene
 const HUB_SCENE := preload('res://src/level/hub_level.tscn') as PackedScene
 const SHIP_SCENE := preload('res://src/ship/ship.tscn') as PackedScene
 const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
@@ -96,7 +97,14 @@ func load_level() -> void:
 			item.reparent(_ship)
 
 		if _level is HubLevel:
-			next_level = LEVEL_SCENE
+			var has_key := false
+			for item in _ship.collected_items:
+				if item is Key:
+					has_key = true
+			if has_key:
+				next_level = FINAL_LEVEL_SCENE
+			else:
+				next_level = LEVEL_SCENE
 
 		_level.queue_free()
 		_level = null
@@ -148,10 +156,10 @@ func start_level() -> void:
 			item.freeze = false
 
 	_player.update_oxygen(-10000000)
-	if _level is RandomLevel:
-		_player.infinite_oxygen = false
-	elif _level is HubLevel:
+	if _level is HubLevel:
 		_player.infinite_oxygen = true
+	else:
+		_player.infinite_oxygen = false
 
 	# Start game
 	_state = State.PLAYING

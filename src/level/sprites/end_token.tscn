@@ -1,44 +1,44 @@
-[gd_scene format=3 uid="uid://02jkoarohiq2"]
+[gd_scene load_steps=3 format=3 uid="uid://02jkoarohiq2"]
 
-[node name="EndToken" type="Node2D"]
-scale = Vector2(20, 20)
+[ext_resource type="Script" uid="uid://id1trbxpk6lf" path="res://src/level/sprites/end_token.gd" id="1_fgajg"]
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fgajg"]
+radius = 46.09772
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Control"]
-scale = Vector2(8, 8)
+[node name="EndToken" type="RigidBody2D"]
+z_index = 10
 collision_layer = 4
 collision_mask = 7
+freeze_mode = 1
+script = ExtResource("1_fgajg")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Control/StaticBody2D"]
-polygon = PackedVector2Array(0, 0, 4.7999997, -2.1999998, 10, 0, 10.999999, 3.5499997, 10, 7, 4.6499996, 9.15, 0, 7, -0.99999994, 3.4999998)
-
-[node name="Token" type="Polygon2D" parent="Control/StaticBody2D"]
+[node name="Token" type="Polygon2D" parent="."]
+position = Vector2(-40, -29)
+scale = Vector2(8, 8)
 color = Color(0.85, 0.69416666, 0, 1)
 polygon = PackedVector2Array(0, 0, -0.74999994, 1.3999999, -0.99999994, 3.5499997, -0.74999994, 5.4999995, 0, 7, 1.9499999, 8.299999, 4.6, 9.15, 7.5499997, 8.45, 10, 7, 10.749999, 5.3999996, 10.999999, 3.6, 10.7, 1.8, 10, 0, 7.7499995, -1.55, 4.7499995, -2.1499999, 1.8499999, -1.55, 0, 0)
 
-[node name="Token" type="Polygon2D" parent="Control/StaticBody2D/Token"]
+[node name="Token" type="Polygon2D" parent="Token"]
 position = Vector2(1.4499998, 1.05)
 scale = Vector2(0.69548607, 0.67724574)
-color = Color(0.61, 0.52155, 0.25620002, 1)
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, -0.99999994, 3.5499997, 0, 7, 4.6, 9.15, 10, 7, 10.999999, 3.6, 10, 0, 4.7499995, -2.1499999, 0, 0)
 
-[node name="Line2D2" type="Line2D" parent="Control/StaticBody2D/Token"]
+[node name="Line2D2" type="Line2D" parent="Token"]
 position = Vector2(0.05, -0.55)
 scale = Vector2(0.99999994, 0.99999994)
 points = PackedVector2Array(3.7499998, 2.3, 3.7499998, 3.1999998)
 width = 1.0
 
-[node name="Line2D" type="Line2D" parent="Control/StaticBody2D/Token"]
+[node name="Line2D" type="Line2D" parent="Token"]
 position = Vector2(2.1499999, -0.55)
 points = PackedVector2Array(3.7499998, 2.3, 3.7499998, 3.1999998)
 width = 1.0
 
-[node name="Line2D3" type="Line2D" parent="Control/StaticBody2D/Token"]
+[node name="Line2D3" type="Line2D" parent="Token"]
 position = Vector2(-0.099999994, -0.35)
 points = PackedVector2Array(2.4999998, 4.15, 3.0999997, 4.7, 3.6999998, 5.0499997, 4.3999996, 5.2, 5.2, 5.2999997, 5.8999996, 5.2499995, 6.45, 5.0499997, 6.9499993, 4.7, 7.4499993, 4.25)
 width = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fgajg")
