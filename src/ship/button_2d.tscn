@@ -16,7 +16,7 @@ script = ExtResource("1_om75y")
 shape = SubResource("CircleShape2D_gjx8a")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(1, 0.1882353, 0.1882353, 1)
 position = Vector2(0, 8)
 scale = Vector2(1, 0.5)
 mesh = SubResource("BoxMesh_j3nv5")
