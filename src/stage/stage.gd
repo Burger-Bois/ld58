@@ -61,12 +61,16 @@ func _ready() -> void:
 
 
 func load_level() -> void:
-	_state = State.LOADING
-
 	# Clear current level
 	if is_instance_valid(_level):
+		for item in _ship.collected_items.duplicate():
+			item.freeze = true
+			item.reparent(_ship)
+
 		_level.queue_free()
 		_level = null
+
+	_state = State.LOADING
 
 	# Create level
 	_level = LEVEL_SCENE.instantiate()
@@ -86,6 +90,16 @@ func spawn_entities() -> void:
 		var item := getNewItem()
 		item.position = item_spawn_position
 		_level.add_child(item)
+
+	# Add ship items back to level
+	var items := [] as Array[Item]
+	for child in _ship.get_children():
+		if child is Item:
+			items.append(child)
+	for item in items:
+		if item is Item:
+			item.reparent(_level)
+			item.freeze = false
 
 	# Start game
 	_state = State.PLAYING
