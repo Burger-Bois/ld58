@@ -1,6 +1,8 @@
 class_name Item
 extends RigidBody2D
 
+const Z_INDEX := 10
+
 @export
 var radius_min: float = 10.0
 @export
@@ -20,6 +22,9 @@ var points: int
 
 func _init() -> void:
 	generate(Color.from_hsv(randf_range(0,1),0.6,1.0))
+
+func _ready() -> void:
+	z_index = Z_INDEX
 
 func generate(color: Color) -> void:
 	var radius := randf_range(radius_min, radius_max)

@@ -85,7 +85,7 @@ func spawn_entities() -> void:
 		var item_spawn_position := _level.random_in_bounds()
 		var item := getNewItem()
 		item.position = item_spawn_position
-		add_child(item)
+		_level.add_child(item)
 
 	# Start game
 	_state = State.PLAYING

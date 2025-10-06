@@ -94,8 +94,6 @@ func _input(event: InputEvent) -> void:
 
 func _grab(object: RigidBody2D) -> void:
 	add_collision_exception_with(object)
-	object.reparent(self, true)
-	object.reset_physics_interpolation()
 	object.freeze = true
 	# Add object collision shapes to player
 	for child in object.get_children():
@@ -104,6 +102,11 @@ func _grab(object: RigidBody2D) -> void:
 			add_child(dupe_collision_shape)
 			dupe_collision_shape.global_position = child.global_position
 			dupe_collision_shape.global_rotation = child.global_rotation
+
+			var remote_transform := RemoteTransform2D.new()
+			remote_transform.remote_path = object.get_path()
+			dupe_collision_shape.add_child(remote_transform)
+
 			_object_collision_shapes.append(dupe_collision_shape)
 	_grabbed_object = object
 
@@ -111,11 +114,12 @@ func _grab(object: RigidBody2D) -> void:
 func _release() -> void:
 	if is_instance_valid(_grabbed_object):
 		_grabbed_object.freeze = false
-		_grabbed_object.reparent(get_parent(), true)
-		_grabbed_object.reset_physics_interpolation()
 		call_deferred('remove_collision_exception_with', _grabbed_object)
 		# Remove object collision shapes from player
 		for object_collision_shape in _object_collision_shapes:
+			for child in object_collision_shape.get_children():
+				if child is RemoteTransform2D:
+					child.remote_path = child.get_path()
 			object_collision_shape.queue_free()
 		_object_collision_shapes = []
 		_grabbed_object = null
