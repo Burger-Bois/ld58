@@ -214,3 +214,12 @@ shape = SubResource("RectangleShape2D_vob5f")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundary"]
 position = Vector2(-83, 154)
 shape = SubResource("RectangleShape2D_0prml")
+
+[node name="Names" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.23921569)
+layout_mode = 0
+offset_left = 782.0
+offset_top = 615.0
+offset_right = 1141.0
+offset_bottom = 638.0
+text = "LUDUM DARE #58 - MADE BY JOHN AND ZOE :)"
