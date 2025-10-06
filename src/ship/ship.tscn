@@ -1,13 +1,71 @@
-[gd_scene load_steps=5 format=4 uid="uid://cqi7qxlttuvwa"]
+[gd_scene load_steps=13 format=4 uid="uid://cqi7qxlttuvwa"]
 
 [ext_resource type="Script" uid="uid://ncnsgnqh8bl1" path="res://src/ship/ship.gd" id="1_kkffy"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_qhocr"]
 [ext_resource type="Script" uid="uid://c24gixp7b8hex" path="res://src/ship/collection_area.gd" id="2_kkffy"]
 [ext_resource type="PackedScene" uid="uid://5tfdopmswn84" path="res://src/ship/button_2d.tscn" id="4_a5wj4"]
+[ext_resource type="Script" uid="uid://6pd05xrfxsdx" path="res://src/ship/score.gd" id="5_i0xkg"]
+[ext_resource type="Script" uid="uid://5uonvntkao1f" path="res://src/ship/red_score.gd" id="6_6jn7f"]
+[ext_resource type="Script" uid="uid://b4cja1w2vaxfm" path="res://src/ship/yellow_score.gd" id="7_1uitl"]
+[ext_resource type="Script" uid="uid://bcs4lc5krskg4" path="res://src/ship/blue_score.gd" id="8_5i133"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rg0bu"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jn7f"]
+bg_color = Color(0.06649999, 0.44935003, 0.95, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0xkg"]
+bg_color = Color(0.8398242, 0.7596881, 0.012155132, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkwgg"]
+bg_color = Color(0.688359, 0, 0.12760904, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [node name="Ship" type="Node2D"]
 visibility_layer = 3
 script = ExtResource("1_kkffy")
+
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -144.0
+offset_top = 111.0
+offset_right = -90.0
+offset_bottom = 135.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 17
+text = "SCORE"
+
+[node name="Score2" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -144.0
+offset_top = 111.0
+offset_right = -127.0
+offset_bottom = 151.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 29
+text = "0"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visibility_layer = 3
@@ -34,24 +92,55 @@ position = Vector2(-224, 0)
 unique_name_in_owner = true
 position = Vector2(-96, -144)
 
-[node name="Score" type="Node2D" parent="."]
+[node name="Score" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = 94.0
+offset_right = -1.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -1
+alignment = 1
+script = ExtResource("5_i0xkg")
 
-[node name="ScoreLabel" type="Label" parent="Score"]
-unique_name_in_owner = true
-offset_left = -142.0
-offset_top = 116.0
-offset_right = -81.0
-offset_bottom = 144.0
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 17
-text = "SCORE"
+[node name="BlueScore" type="ProgressBar" parent="Score"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/outline_size = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_rg0bu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6jn7f")
+max_value = 30.0
+step = 1.0
+value = 15.0
+show_percentage = false
+script = ExtResource("8_5i133")
 
-[node name="Score" type="Label" parent="Score"]
-unique_name_in_owner = true
-offset_left = -77.0
-offset_top = 107.0
-offset_right = -59.0
-offset_bottom = 152.0
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 29
-text = "0"
+[node name="YellowScore" type="ProgressBar" parent="Score"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/outline_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_rg0bu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i0xkg")
+max_value = 30.0
+step = 1.0
+value = 15.0
+show_percentage = false
+script = ExtResource("7_1uitl")
+
+[node name="RedScore" type="ProgressBar" parent="Score"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/outline_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_rg0bu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kkwgg")
+max_value = 30.0
+step = 1.0
+value = 15.0
+show_percentage = false
+script = ExtResource("6_6jn7f")

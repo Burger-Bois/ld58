@@ -21,10 +21,21 @@ func on_body_exit(_body: Node2D) -> void:
 		resume_oxygen_timer()
 	
 func collect_item(_item: Item) -> void:
-	_collected += _item.points
+	if _item is BlueItem:
+		SignalBus.add_to_blue_score.emit(_item.points)
+	elif _item is YellowItem:
+		SignalBus.add_to_yellow_score.emit(_item.points)
+	elif _item is RedItem:
+		SignalBus.add_to_red_score.emit(_item.points)
+		
 
 func lose_item(_item: Item) -> void:
-	_collected += -_item.points
+	if _item is BlueItem:
+		SignalBus.add_to_blue_score.emit(_item.points * -1)
+	elif _item is YellowItem:
+		SignalBus.add_to_yellow_score.emit(_item.points * -1)
+	elif _item is RedItem:
+		SignalBus.add_to_red_score.emit(_item.points * -1)
 
 func _set_collected(new_collected: int) -> void:
 	_collected = new_collected

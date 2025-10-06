@@ -8,4 +8,10 @@ signal player_oxygen_paused(paused: bool)
 
 signal player_sprinting(is_sprinting: bool)
 
+signal add_to_red_score(score: int)
+
+signal add_to_yellow_score(score: int)
+
+signal add_to_blue_score(score: int)
+
 signal game_over()
