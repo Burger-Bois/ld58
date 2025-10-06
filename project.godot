@@ -23,6 +23,12 @@ SignalBus="*res://src/signal_bus.gd"
 
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+red_items=""
+blue_items=""
+yellow_items=""
+
 [input]
 
 player_move_left={

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bobrd6wi1a8i8"]
+
+[ext_resource type="Script" uid="uid://cy5gjgrlheknc" path="res://src/level/trade_area.gd" id="1_scmvt"]
+
+[node name="TradeArea" type="Area2D"]
+visibility_layer = 3
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_scmvt")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfvn3ybq34cw" path="res://src/item/blue_item.gd" id="1_pdt35"]
 
-[node name="PurpleItem" type="RigidBody2D"]
+[node name="PurpleItem" type="RigidBody2D" groups=["blue_items"]]
 modulate = Color(0.5137255, 0.3372549, 1, 1)
 position = Vector2(1, 0)
 collision_layer = 4

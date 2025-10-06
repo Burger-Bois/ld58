@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwj2bcl2wwg4r" path="res://src/item/yellow_item.gd" id="1_5ijqn"]
 
-[node name="YellowItem" type="RigidBody2D"]
+[node name="YellowItem" type="RigidBody2D" groups=["yellow_items"]]
 modulate = Color(0.5137255, 0.3372549, 1, 1)
 position = Vector2(1, 0)
 collision_layer = 4
