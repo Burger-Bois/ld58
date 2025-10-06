@@ -47,6 +47,8 @@ func _ready() -> void:
 	_ship = SHIP_SCENE.instantiate() as Ship
 	_ship.process_mode = Node.PROCESS_MODE_DISABLED
 	_ship.leave_pressed.connect(load_level)
+	_ship.item_collected.connect(collect_item)
+	_ship.item_lost.connect(lose_item)
 	add_child(_ship)
 
 	_player = PLAYER_SCENE.instantiate() as Player
@@ -57,6 +59,16 @@ func _ready() -> void:
 	_player.add_child(camera)
 
 	minimap.to_follow = _player
+
+
+func collect_item(item: Item) -> void:
+	if item is OxygenUpgrade:
+		_player.oxygen_upgraded = true
+
+
+func lose_item(item: Item) -> void:
+	if item is OxygenUpgrade:
+		_player.oxygen_upgraded = false
 
 
 func load_level() -> void:

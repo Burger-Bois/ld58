@@ -6,6 +6,8 @@ extends CharacterBody2D
 var default_speed := 180.0
 @export
 var multiplier := 1.6
+@export
+var oxygen_upgrade_multiplier := 0.5
 
 
 @onready
@@ -23,6 +25,8 @@ var _object_collision_shapes: Array[Node2D] = []
 var is_sprinting: bool = false
 var sprint_speed: float = default_speed * multiplier
 var infinite_oxygen: bool = false
+
+var oxygen_upgraded := false
 
 
 func _physics_process(delta: float) -> void:
@@ -58,7 +62,10 @@ func _physics_process(delta: float) -> void:
 		if collider is RigidBody2D:
 			collider.apply_central_impulse(-collision.get_normal() * 20)
 	
-	update_oxygen(1*delta)
+	var oxygen_multiplier := 1.0
+	if oxygen_upgraded:
+		oxygen_multiplier = oxygen_upgrade_multiplier
+	update_oxygen(1.0 * oxygen_multiplier * delta)
 	
 
 func update_oxygen(minus: float) -> void:
