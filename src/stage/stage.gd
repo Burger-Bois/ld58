@@ -17,6 +17,8 @@ var end_menu: EndMenu = %EndMenu
 @onready
 var pause_menu: PauseMenu = %PauseMenu
 @onready
+var loading_screen: Control = %LoadingScreen
+@onready
 var pauser: Pauser = %Pauser
 @onready
 var minimap: Minimap = %Minimap
@@ -113,10 +115,12 @@ func set_state(new_state: State) -> void:
 				_ship.process_mode = Node.PROCESS_MODE_DISABLED
 			if is_instance_valid(_player):
 				_player.process_mode = Node.PROCESS_MODE_DISABLED
+			loading_screen.show()
 		State.PLAYING:
 			get_tree().paused = false
 			_ship.process_mode = Node.PROCESS_MODE_PAUSABLE
 			_player.process_mode = Node.PROCESS_MODE_PAUSABLE
+			loading_screen.hide()
 		State.PAUSED:
 			get_tree().paused = true
 
