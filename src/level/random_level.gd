@@ -5,6 +5,7 @@ const DEBUG := false
 
 const SOURCE_ID = 0
 
+const VOID_ID := 0
 const WALL_ID := 1
 const FLOOR_ID := 2
 
@@ -133,20 +134,6 @@ func make_map():
 	#find_start_room()
 	#find_end_room()
 	
-	# Fill TileMap with walls, then carve empty rooms
-	# var full_rect = Rect2()
-	# for room in $Rooms.get_children():
-	# 	var r = Rect2(
-	# 		room.position-room.size,
-	# 		room.get_child(0).get_shape().extents*2
-	# 	)
-	# 	full_rect = full_rect.merge(r)
-	# var topleft = Map.local_to_map(full_rect.position)
-	# var bottomright = Map.local_to_map(full_rect.end)
-	# for x in range(topleft.x, bottomright.x):
-	# 	for y in range(topleft.y, bottomright.y):
-	# 		Map.set_cell(Vector2i(x, y), 0, Vector2i(0, 0), 1)
-	
 	# Create rooms
 	for room in $Rooms.get_children():
 		create_room(room)
@@ -161,6 +148,15 @@ func make_map():
 			var end_pos := path.get_point_position(end_point_id)
 			create_corridor(start_pos, end_pos)
 		corridors.append(start_point_id)
+	
+	# Add void
+	var bounding_box := Map.get_used_rect()
+	for x in range(bounding_box.position.x, bounding_box.end.x + 1):
+		for y in range(bounding_box.position.y, bounding_box.end.y + 1):
+			var coords := Vector2i(x, y)
+			var current_id := Map.get_cell_alternative_tile(coords)
+			if current_id == -1:
+				Map.set_cell(coords, SOURCE_ID, Vector2i.ZERO, VOID_ID)
 
 
 func create_room(room: Room) -> void:
