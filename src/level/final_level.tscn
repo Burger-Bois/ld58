@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bukqhgpgwsprf"]
+[gd_scene load_steps=4 format=3 uid="uid://bukqhgpgwsprf"]
 
 [ext_resource type="Script" uid="uid://dhxuuymytb8ba" path="res://src/level/final_level.gd" id="1_q8q2h"]
+[ext_resource type="Texture2D" uid="uid://h8vy4pddrab0" path="res://src/assets/space/WHITE.png" id="2_e5cm4"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="2_r6q5y"]
 
 [node name="Level" type="Node2D"]
 visibility_layer = 3
 script = ExtResource("1_q8q2h")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -63736.0
+offset_top = -38646.0
+offset_right = 223968.0
+offset_bottom = 70368.0
+scale = Vector2(0.5, 1)
+texture = ExtResource("2_e5cm4")
+stretch_mode = 1
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visibility_layer = 3

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://da8dal8mtaoco"]
+[gd_scene load_steps=15 format=3 uid="uid://da8dal8mtaoco"]
 
 [ext_resource type="Script" uid="uid://cqfkvfq1uyusx" path="res://src/ui/main_menu.gd" id="1_qkuje"]
 [ext_resource type="Texture2D" uid="uid://dif8udux2l76v" path="res://src/assets/title/START.png" id="2_0prml"]
 [ext_resource type="Texture2D" uid="uid://cytlr7b6f88c1" path="res://src/assets/title/S1.png" id="2_vob5f"]
+[ext_resource type="Texture2D" uid="uid://h8vy4pddrab0" path="res://src/assets/space/WHITE.png" id="2_yipxn"]
 [ext_resource type="Texture2D" uid="uid://t0tt26weu77m" path="res://src/assets/title/H1.png" id="3_0prml"]
 [ext_resource type="Texture2D" uid="uid://05sw6j7pb0ur" path="res://src/assets/title/I.png" id="4_yipxn"]
 [ext_resource type="Texture2D" uid="uid://tltult5cmri6" path="res://src/assets/title/P1.png" id="5_mxqo5"]
@@ -26,6 +27,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qkuje")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -2201.0
+offset_top = -1959.0
+offset_right = 2919.0
+offset_bottom = 3161.0
+texture = ExtResource("2_yipxn")
+stretch_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 light_mask = 2

@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dudynfsiobndv"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_s06x5"]
+[gd_scene load_steps=2 format=3 uid="uid://dudynfsiobndv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okjrq"]
 size = Vector2(96, 96)
@@ -8,11 +6,6 @@ size = Vector2(96, 96)
 [node name="FloorTile" type="StaticBody2D"]
 collision_layer = 2
 collision_mask = 0
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(32, 32)
-mesh = SubResource("QuadMesh_s06x5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_okjrq")
