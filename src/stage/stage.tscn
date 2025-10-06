@@ -94,3 +94,7 @@ offset_right = 3.0
 stream = ExtResource("7_804oe")
 volume_db = -13.071
 autoplay = true
+
+[node name="Level" type="Node2D" parent="."]
+unique_name_in_owner = true
+visibility_layer = 3

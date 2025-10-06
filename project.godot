@@ -75,6 +75,8 @@ player_use={
 2d_physics/layer_3="objects"
 2d_physics/layer_4="doors"
 2d_physics/layer_5="buttons"
+2d_physics/layer_24="menu_letters"
+2d_physics/layer_25="level_creation_rooms"
 
 [physics]
 

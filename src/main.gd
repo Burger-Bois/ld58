@@ -17,8 +17,8 @@ func start() -> void:
 	main_menu.hide()
 	_stage = stage_scene.instantiate()
 	_stage.finished.connect(end)
-	_stage.completed.connect(start)
 	add_child(_stage)
+	_stage.load_level()
 
 
 func end() -> void:
