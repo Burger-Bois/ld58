@@ -12,6 +12,16 @@ size = Vector3(32, 32, 1)
 collision_layer = 16
 script = ExtResource("1_om75y")
 
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = -43.0
+offset_top = -74.0
+offset_right = 66.0
+offset_bottom = -29.0
+theme_override_font_sizes/font_size = 32
+text = "Press E"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gjx8a")
 
