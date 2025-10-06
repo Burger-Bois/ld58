@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://dnxynr0dyi4wx"]
+[gd_scene load_steps=14 format=4 uid="uid://dnxynr0dyi4wx"]
 
 [ext_resource type="Script" uid="uid://cdvgquvmmi17o" path="res://src/level/hub_level.gd" id="1_1cd0q"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_m1ayx"]
+[ext_resource type="PackedScene" uid="uid://cr8k0lka2qpgn" path="res://src/level/sprites/key.tscn" id="2_af6iu"]
 [ext_resource type="PackedScene" uid="uid://bobrd6wi1a8i8" path="res://src/level/trade_area.tscn" id="3_7htcs"]
 [ext_resource type="PackedScene" uid="uid://b5deoxsaq2udf" path="res://src/item/oxygen_upgrade.tscn" id="5_0lo7e"]
 [ext_resource type="PackedScene" uid="uid://48rxnkqu317l" path="res://src/item/strength_upgrade.tscn" id="6_af6iu"]
@@ -16,9 +17,15 @@ size = Vector2(608, 528)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7htcs"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_bo1g2"]
+size = Vector3(64, 64, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_af6iu"]
+
 [node name="HubLevel" type="Node2D"]
 visibility_layer = 3
 script = ExtResource("1_1cd0q")
+key_scene = ExtResource("2_af6iu")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visibility_layer = 3
@@ -38,7 +45,8 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.46666667)
 theme_override_font_sizes/font_size = 100
 text = "THE HUB"
 
-[node name="RedTradeArea" parent="." instance=ExtResource("3_7htcs")]
+[node name="RedTradeArea" parent="." groups=["trade_areas"] instance=ExtResource("3_7htcs")]
+unique_name_in_owner = true
 position = Vector2(1432, -576)
 reward_scene = ExtResource("6_af6iu")
 item_group = "red_items"
@@ -57,7 +65,8 @@ visibility_layer = 3
 shape = SubResource("RectangleShape2D_fol3d")
 metadata/_edit_lock_ = true
 
-[node name="YellowTradeArea" parent="." instance=ExtResource("3_7htcs")]
+[node name="YellowTradeArea" parent="." groups=["trade_areas"] instance=ExtResource("3_7htcs")]
+unique_name_in_owner = true
 position = Vector2(1432, 0)
 reward_scene = ExtResource("6_bo1g2")
 item_group = "yellow_items"
@@ -77,13 +86,14 @@ shape = SubResource("RectangleShape2D_fol3d")
 metadata/_edit_lock_ = true
 
 [node name="BlueTradeArea" parent="." instance=ExtResource("3_7htcs")]
+unique_name_in_owner = true
 position = Vector2(1432, 576)
 reward_scene = ExtResource("5_0lo7e")
 item_group = "blue_items"
 cost = 10
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="BlueTradeArea"]
-modulate = Color(0.26666668, 0.5372549, 0.6392157, 0.14509805)
+modulate = Color(0.07058824, 0.23921569, 1, 0.09019608)
 visibility_layer = 3
 position = Vector2(0, -16)
 scale = Vector2(607.99994, 496)
@@ -94,3 +104,34 @@ visible = false
 visibility_layer = 3
 shape = SubResource("RectangleShape2D_fol3d")
 metadata/_edit_lock_ = true
+
+[node name="FloorLights" type="Node2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.21568628)
+visibility_layer = 3
+
+[node name="KeySpawnPoint" type="MeshInstance2D" parent="FloorLights"]
+unique_name_in_owner = true
+visibility_layer = 3
+position = Vector2(640, 0)
+mesh = SubResource("BoxMesh_bo1g2")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="FloorLights"]
+visibility_layer = 3
+scale = Vector2(0.5418122, 1.0285531)
+mesh = SubResource("BoxMesh_af6iu")
+
+[node name="Polygon2D" type="Polygon2D" parent="FloorLights"]
+modulate = Color(1, 0, 0, 1)
+visibility_layer = 3
+polygon = PackedVector2Array(632, -32, 632, -584, 1128, -584, 1128, -568, 648, -568, 648, -32)
+
+[node name="Polygon2D2" type="Polygon2D" parent="FloorLights"]
+modulate = Color(1, 1, 0, 1)
+visibility_layer = 3
+polygon = PackedVector2Array(1128, -8, 672, -8, 672, 8, 1128, 8)
+
+[node name="Polygon2D3" type="Polygon2D" parent="FloorLights"]
+modulate = Color(0, 0, 1, 1)
+visibility_layer = 3
+polygon = PackedVector2Array(1128, 568, 648, 568, 648, 32, 632, 32, 632, 584, 1128, 584)

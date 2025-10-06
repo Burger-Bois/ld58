@@ -35,6 +35,10 @@ var _level: Level
 var _ship: Ship
 var _player: Player
 
+var _strength_got := false
+var _speed_got := false
+var _oxygen_got := false
+
 func _init() -> void:
 	SignalBus.game_over.connect(_game_over)
 
@@ -102,6 +106,29 @@ func load_level() -> void:
 	_level = next_level.instantiate()
 	_level.generated.connect(start_level)
 	level_holder.add_child(_level)
+
+	if _level is HubLevel:
+		_level.strength_upgrade_got.connect(func(): _strength_got = true)
+		_level.speed_upgrade_got.connect(func(): _speed_got = true)
+		_level.oxygen_upgrade_got.connect(func(): _oxygen_got = true)
+		if _strength_got:
+			var respawn_upgrade = true
+			for child in _level.get_children():
+				if child is StrengthUpgrade:
+					respawn_upgrade = false
+			_level.get_strength(respawn_upgrade)
+		if _speed_got:
+			var respawn_upgrade = true
+			for child in _level.get_children():
+				if child is SpeedUpgrade:
+					respawn_upgrade = false
+			_level.get_speed(respawn_upgrade)
+		if _oxygen_got:
+			var respawn_upgrade = true
+			for child in _level.get_children():
+				if child is OxygenUpgrade:
+					respawn_upgrade = false
+			_level.get_oxygen(respawn_upgrade)
 
 
 func start_level() -> void:

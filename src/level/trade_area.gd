@@ -1,6 +1,8 @@
 class_name TradeArea
 extends Area2D
 
+signal completed()
+
 @export
 var reward_scene: PackedScene
 
@@ -37,6 +39,7 @@ func lose_item(body: Node2D) -> void:
 func _set_current_amount(new_amount: int) -> void:
 	_current_amount = new_amount
 	if _current_amount >= cost:
+		completed.emit()
 		var reward := reward_scene.instantiate() as Node2D
 		reward.global_position = global_position
 		add_sibling(reward)
