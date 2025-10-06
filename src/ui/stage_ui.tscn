@@ -45,18 +45,19 @@ script = ExtResource("2_eilgr")
 
 [node name="Label" type="Label" parent="OxygenBar"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = -20.0
-offset_right = 31.0
-offset_bottom = 3.0
+offset_left = 2.0
+offset_top = -24.0
+offset_right = 29.0
+offset_bottom = 4.0
 theme_override_colors/font_color = Color(0.47058824, 0.7411765, 1, 1)
+theme_override_font_sizes/font_size = 20
 text = "O"
 
 [node name="Label2" type="Label" parent="OxygenBar"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = -28.0
-offset_right = 30.005001
-offset_bottom = -5.0
+offset_left = 17.0
+offset_top = -29.0
+offset_right = 31.005001
+offset_bottom = -6.0
 theme_override_colors/font_color = Color(0.47163272, 0.7402592, 0.9999985, 1)
 text = "2"

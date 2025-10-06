@@ -122,6 +122,14 @@ value = 15.0
 show_percentage = false
 script = ExtResource("8_5i133")
 
+[node name="BlueScoreLabel" type="Label" parent="Score/BlueScore"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 158.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
+
 [node name="YellowScore" type="ProgressBar" parent="Score"]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
@@ -135,6 +143,14 @@ value = 15.0
 show_percentage = false
 script = ExtResource("7_1uitl")
 
+[node name="YellowScoreLabel" type="Label" parent="Score/YellowScore"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 158.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
+
 [node name="RedScore" type="ProgressBar" parent="Score"]
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
@@ -147,6 +163,14 @@ step = 1.0
 value = 15.0
 show_percentage = false
 script = ExtResource("6_6jn7f")
+
+[node name="RedScoreLabel" type="Label" parent="Score/RedScore"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 158.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "0"
 
 [node name="Door" type="MeshInstance2D" parent="."]
 modulate = Color(1, 0.29000002, 0.29000002, 1)
