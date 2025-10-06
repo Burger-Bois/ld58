@@ -1,15 +1,25 @@
-[gd_scene format=3 uid="uid://cr8k0lka2qpgn"]
+[gd_scene load_steps=4 format=3 uid="uid://cr8k0lka2qpgn"]
 
-[node name="Key" type="StaticBody2D"]
-scale = Vector2(10, 10)
-collision_layer = 4
+[ext_resource type="Script" uid="uid://5kan6hgxuley" path="res://src/level/sprites/key.gd" id="1_yo1ol"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo1ol"]
+size = Vector2(60, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_at5pt"]
+size = Vector2(68, 38)
+
+[node name="Key" type="RigidBody2D"]
+z_index = 10
+collision_layer = 68
 collision_mask = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 2, 0, 2, 1, 6, 1, 6, 3, 5, 3, 5, 2, 4, 2, 4, 3, 3, 3, 3, 2, 2, 2, 2, 3, 0, 3)
+freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_yo1ol")
 
 [node name="Key" type="Polygon2D" parent="."]
-position = Vector2(3, 1)
+position = Vector2(8.4703295e-22, -5)
+scale = Vector2(10, 10)
 color = Color(0.8257369, 0.6358587, 0.099056505, 1)
 polygon = PackedVector2Array(2, 1, 1, 1, 1, 2, 0, 2, 0, 1, -1, 1, -1, 2, -2, 2, -3, 2, -3, -1, -1, -1, -1, 0, 3, 0, 3, 2, 2, 2, 2, 1)
 
@@ -17,3 +27,14 @@ polygon = PackedVector2Array(2, 1, 1, 1, 1, 2, 0, 2, 0, 1, -1, 1, -1, 2, -2, 2, 
 points = PackedVector2Array(-2, 0, -1.9999999, 0.47374463, -2, 1, -2, 1, -2, 1)
 closed = true
 width = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yo1ol")
+
+[node name="OpenRange" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 64
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenRange"]
+shape = SubResource("RectangleShape2D_at5pt")

@@ -1,12 +1,17 @@
-[gd_scene load_steps=14 format=4 uid="uid://dnxynr0dyi4wx"]
+[gd_scene load_steps=19 format=4 uid="uid://dnxynr0dyi4wx"]
 
 [ext_resource type="Script" uid="uid://cdvgquvmmi17o" path="res://src/level/hub_level.gd" id="1_1cd0q"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_m1ayx"]
 [ext_resource type="PackedScene" uid="uid://cr8k0lka2qpgn" path="res://src/level/sprites/key.tscn" id="2_af6iu"]
 [ext_resource type="PackedScene" uid="uid://bobrd6wi1a8i8" path="res://src/level/trade_area.tscn" id="3_7htcs"]
+[ext_resource type="PackedScene" uid="uid://bfhl3h4v2on0m" path="res://src/item/trash_item.tscn" id="4_fol3d"]
 [ext_resource type="PackedScene" uid="uid://b5deoxsaq2udf" path="res://src/item/oxygen_upgrade.tscn" id="5_0lo7e"]
 [ext_resource type="PackedScene" uid="uid://48rxnkqu317l" path="res://src/item/strength_upgrade.tscn" id="6_af6iu"]
 [ext_resource type="PackedScene" uid="uid://bh1qnfsonoqa0" path="res://src/item/speed_upgrade.tscn" id="6_bo1g2"]
+[ext_resource type="PackedScene" uid="uid://dj7ajwpb3ro24" path="res://src/level/sprites/final_chest.tscn" id="8_gbyyv"]
+[ext_resource type="PackedScene" uid="uid://dcdeqxaxqu4l1" path="res://src/item/red_item.tscn" id="10_xg0n8"]
+[ext_resource type="PackedScene" uid="uid://c5n0ewt86g732" path="res://src/item/yellow_item.tscn" id="11_sa5vj"]
+[ext_resource type="PackedScene" uid="uid://7sstqgji2g80" path="res://src/item/blue_item.tscn" id="12_2dkd5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0lo7e"]
 
@@ -135,3 +140,62 @@ polygon = PackedVector2Array(1128, -8, 672, -8, 672, 8, 1128, 8)
 modulate = Color(0, 0, 1, 1)
 visibility_layer = 3
 polygon = PackedVector2Array(1128, 568, 648, 568, 648, 32, 632, 32, 632, 584, 1128, 584)
+
+[node name="FinalChest" parent="." instance=ExtResource("8_gbyyv")]
+position = Vector2(288.00003, 175.99997)
+scale = Vector2(10, 10)
+artifact_scene = ExtResource("4_fol3d")
+
+[node name="RedItem" parent="." instance=ExtResource("10_xg0n8")]
+position = Vector2(512, -592)
+
+[node name="RedItem2" parent="." instance=ExtResource("10_xg0n8")]
+position = Vector2(512, -592)
+
+[node name="RedItem3" parent="." instance=ExtResource("10_xg0n8")]
+position = Vector2(512, -592)
+
+[node name="RedItem4" parent="." instance=ExtResource("10_xg0n8")]
+position = Vector2(512, -592)
+
+[node name="RedItem5" parent="." instance=ExtResource("10_xg0n8")]
+position = Vector2(512, -592)
+
+[node name="RedItem6" parent="." instance=ExtResource("10_xg0n8")]
+position = Vector2(512, -592)
+
+[node name="YellowItem" parent="." instance=ExtResource("11_sa5vj")]
+position = Vector2(504, -160)
+
+[node name="YellowItem2" parent="." instance=ExtResource("11_sa5vj")]
+position = Vector2(504, -160)
+
+[node name="YellowItem3" parent="." instance=ExtResource("11_sa5vj")]
+position = Vector2(504, -160)
+
+[node name="YellowItem4" parent="." instance=ExtResource("11_sa5vj")]
+position = Vector2(504, -160)
+
+[node name="YellowItem5" parent="." instance=ExtResource("11_sa5vj")]
+position = Vector2(504, -160)
+
+[node name="YellowItem6" parent="." instance=ExtResource("11_sa5vj")]
+position = Vector2(504, -160)
+
+[node name="PurpleItem" parent="." instance=ExtResource("12_2dkd5")]
+position = Vector2(536, 576)
+
+[node name="PurpleItem2" parent="." instance=ExtResource("12_2dkd5")]
+position = Vector2(536, 576)
+
+[node name="PurpleItem3" parent="." instance=ExtResource("12_2dkd5")]
+position = Vector2(536, 576)
+
+[node name="PurpleItem4" parent="." instance=ExtResource("12_2dkd5")]
+position = Vector2(536, 576)
+
+[node name="PurpleItem5" parent="." instance=ExtResource("12_2dkd5")]
+position = Vector2(536, 576)
+
+[node name="PurpleItem6" parent="." instance=ExtResource("12_2dkd5")]
+position = Vector2(536, 576)
