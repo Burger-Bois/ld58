@@ -3,19 +3,14 @@ extends Node2D
 
 signal finished()
 
-const LEVEL_SCENE := preload('res://src/level/level.tscn') as PackedScene
+const LEVEL_SCENE := preload('res://src/level/random_level.tscn') as PackedScene
+const HUB_SCENE := preload('res://src/level/hub_level.tscn') as PackedScene
 const SHIP_SCENE := preload('res://src/ship/ship.tscn') as PackedScene
 const PLAYER_SCENE := preload('res://src/player/player.tscn') as PackedScene
-const RED_ITEM_SCENE := preload('res://src/item/red_item.tscn') as PackedScene
-const YELLOW_ITEM_SCENE := preload('res://src/item/yellow_item.tscn') as PackedScene
-const BLUE_ITEM_SCENE := preload('res://src/item/blue_item.tscn') as PackedScene
-const TRASH_ITEM_SCENE := preload('res://src/item/trash_item.tscn') as PackedScene
 
 
 @export
 var end_time: float = 120.0
-@export
-var item_count: int = 32
 
 @onready
 var end_menu: EndMenu = %EndMenu
@@ -25,6 +20,8 @@ var pause_menu: PauseMenu = %PauseMenu
 var pauser: Pauser = %Pauser
 @onready
 var minimap: Minimap = %Minimap
+@onready
+var level_holder: Node2D = %Level
 
 enum State {
 	LOADING,
@@ -63,34 +60,30 @@ func _ready() -> void:
 
 func load_level() -> void:
 	# Clear current level
+	var next_level := HUB_SCENE
 	if is_instance_valid(_level):
 		for item in _ship.collected_items.duplicate():
 			item.freeze = true
 			item.reparent(_ship)
+
+		if _level is HubLevel:
+			next_level = LEVEL_SCENE
 
 		_level.queue_free()
 		_level = null
 
 	_state = State.LOADING
 
-	# Create level
-	_level = LEVEL_SCENE.instantiate()
-	_level.generated.connect(spawn_entities)
-	%Level.add_child(_level, true)
+	_level = next_level.instantiate()
+	_level.generated.connect(start_level)
+	level_holder.add_child(_level)
 
 
-func spawn_entities() -> void:
+func start_level() -> void:
 	# Place ship and player
 	var ship_spawn_location := _level.docking_position()
 	_ship.position = ship_spawn_location
 	_player.position = ship_spawn_location
-
-	# Spawn items
-	for i in range(50):
-		var item_spawn_position := _level.random_in_bounds()
-		var item := getNewItem()
-		item.position = item_spawn_position
-		_level.add_child(item)
 
 	# Add ship items back to level
 	var items := [] as Array[Item]
@@ -120,20 +113,6 @@ func set_state(new_state: State) -> void:
 			_player.process_mode = Node.PROCESS_MODE_PAUSABLE
 		State.PAUSED:
 			get_tree().paused = true
-
-
-func getNewItem() -> Item:
-	var i = randi_range(1, 100)
-	if i <= 20:
-		return YELLOW_ITEM_SCENE.instantiate()
-		
-	if i > 20 and i <= 40:
-		return RED_ITEM_SCENE.instantiate()
-		
-	if i > 40 and i <= 60:
-		return BLUE_ITEM_SCENE.instantiate()
-	
-	return TRASH_ITEM_SCENE.instantiate()
 
 
 func _game_over() -> void:
