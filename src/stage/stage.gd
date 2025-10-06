@@ -64,11 +64,23 @@ func _ready() -> void:
 func collect_item(item: Item) -> void:
 	if item is OxygenUpgrade:
 		_player.oxygen_upgraded = true
+	elif item is SpeedUpgrade:
+		_player.speed_upgraded = true
+	elif item is StrengthUpgrade:
+		_player.strength_upgraded = true
+		for trash_item: TrashItem in get_tree().get_nodes_in_group('trash_items'):
+			trash_item.linear_damp = 0
 
 
 func lose_item(item: Item) -> void:
 	if item is OxygenUpgrade:
 		_player.oxygen_upgraded = false
+	elif item is SpeedUpgrade:
+		_player.speed_upgraded = false
+	elif item is StrengthUpgrade:
+		_player.strength_upgraded = false
+		for trash_item: TrashItem in get_tree().get_nodes_in_group('trash_items'):
+			trash_item.linear_damp = 50
 
 
 func load_level() -> void:

@@ -8,6 +8,8 @@ var default_speed := 180.0
 var multiplier := 1.6
 @export
 var oxygen_upgrade_multiplier := 0.5
+@export
+var speed_upgrade_multiplier := 1.5
 
 
 @onready
@@ -27,11 +29,13 @@ var sprint_speed: float = default_speed * multiplier
 var infinite_oxygen: bool = false
 
 var oxygen_upgraded := false
+var speed_upgraded := false
+var strength_upgraded := false
 
 
 func _physics_process(delta: float) -> void:
 	var weight_multiplier: float
-	if is_instance_valid(_grabbed_object):
+	if is_instance_valid(_grabbed_object) and not strength_upgraded:
 		weight_multiplier = min(1 / (_grabbed_object.mass / 50), 1)
 	else:
 		weight_multiplier = 1
@@ -43,7 +47,10 @@ func _physics_process(delta: float) -> void:
 		'player_move_up',
 		'player_move_down',
 	).normalized()
-	velocity = direction * _speed * weight_multiplier
+	var speed_upgrade := 1.0
+	if speed_upgraded:
+		speed_upgrade = speed_upgrade_multiplier
+	velocity = direction * _speed * weight_multiplier * speed_upgrade
 	move_and_slide()
 
 	# Look at mouse

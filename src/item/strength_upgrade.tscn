@@ -1,42 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5deoxsaq2udf"]
+[gd_scene load_steps=4 format=3 uid="uid://48rxnkqu317l"]
 
-[ext_resource type="Script" uid="uid://cfit1sg3oq1mr" path="res://src/item/oxygen_upgrade.gd" id="1_7cmol"]
+[ext_resource type="Script" uid="uid://dmvbpup4430pq" path="res://src/item/strength_upgrade.gd" id="1_wn8kh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8kdp2"]
 size = Vector3(64, 128, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8kdp2"]
-size = Vector2(64, 128)
+size = Vector2(64, 192)
 
-[node name="OxygenUpgrade" type="RigidBody2D"]
+[node name="StrengthUpgrade" type="RigidBody2D"]
 z_index = 10
 collision_layer = 4
 collision_mask = 7
 freeze_mode = 1
 continuous_cd = 1
-script = ExtResource("1_7cmol")
+script = ExtResource("1_wn8kh")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 modulate = Color(0.61960787, 0.2901961, 1, 1)
+scale = Vector2(1, 1.5)
 mesh = SubResource("BoxMesh_8kdp2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8kdp2")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -23.0
-offset_top = -20.0
-offset_right = 8.0
-offset_bottom = 35.0
+offset_left = -31.0
+offset_top = 84.0
+offset_right = 136.0
+offset_bottom = 139.0
+rotation = -1.5707964
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 40
-text = "O"
-
-[node name="Label2" type="Label" parent="."]
-offset_left = 5.0
-offset_top = -36.0
-offset_right = 23.0
-offset_bottom = 9.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 32
-text = "2"
+text = "Strength"

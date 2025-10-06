@@ -28,6 +28,7 @@ window/stretch/mode="canvas_items"
 red_items=""
 blue_items=""
 yellow_items=""
+trash_items=""
 
 [input]
 

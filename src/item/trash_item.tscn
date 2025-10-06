@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1gey530pjr7k" path="res://src/item/trash_item.gd" id="1_xwx1l"]
 
-[node name="TrashItem" type="RigidBody2D"]
+[node name="TrashItem" type="RigidBody2D" groups=["trash_items"]]
 modulate = Color(0.5137255, 0.3372549, 1, 1)
 position = Vector2(1, 0)
 collision_layer = 4
@@ -11,9 +11,3 @@ gravity_scale = 10000.0
 freeze_mode = 1
 continuous_cd = 1
 script = ExtResource("1_xwx1l")
-radius_min = null
-radius_max = null
-vertex_count_min = null
-vertex_count_max = null
-damping_min = null
-damping_max = null

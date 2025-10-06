@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://dnxynr0dyi4wx"]
+[gd_scene load_steps=11 format=4 uid="uid://dnxynr0dyi4wx"]
 
 [ext_resource type="Script" uid="uid://cdvgquvmmi17o" path="res://src/level/hub_level.gd" id="1_1cd0q"]
 [ext_resource type="TileSet" uid="uid://o31bke8cjuvk" path="res://src/level/level_tiles.tres" id="1_m1ayx"]
 [ext_resource type="PackedScene" uid="uid://bobrd6wi1a8i8" path="res://src/level/trade_area.tscn" id="3_7htcs"]
-[ext_resource type="PackedScene" uid="uid://bfhl3h4v2on0m" path="res://src/item/trash_item.tscn" id="4_fol3d"]
 [ext_resource type="PackedScene" uid="uid://b5deoxsaq2udf" path="res://src/item/oxygen_upgrade.tscn" id="5_0lo7e"]
+[ext_resource type="PackedScene" uid="uid://48rxnkqu317l" path="res://src/item/strength_upgrade.tscn" id="6_af6iu"]
+[ext_resource type="PackedScene" uid="uid://bh1qnfsonoqa0" path="res://src/item/speed_upgrade.tscn" id="6_bo1g2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0lo7e"]
 
@@ -39,7 +40,7 @@ text = "THE HUB"
 
 [node name="RedTradeArea" parent="." instance=ExtResource("3_7htcs")]
 position = Vector2(1432, -576)
-reward_scene = ExtResource("4_fol3d")
+reward_scene = ExtResource("6_af6iu")
 item_group = "red_items"
 cost = 10
 
@@ -58,7 +59,7 @@ metadata/_edit_lock_ = true
 
 [node name="YellowTradeArea" parent="." instance=ExtResource("3_7htcs")]
 position = Vector2(1432, 0)
-reward_scene = ExtResource("4_fol3d")
+reward_scene = ExtResource("6_bo1g2")
 item_group = "yellow_items"
 cost = 10
 

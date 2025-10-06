@@ -30,7 +30,7 @@ func generate(color: Color) -> void:
 	var radius := randf_range(radius_min, radius_max)
 	generate_shape(radius)
 	if self is TrashItem:
-		mass = 300
+		mass = 1000
 		points = 0
 		linear_damp = 50
 	else:
