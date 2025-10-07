@@ -13,7 +13,7 @@ offset_left = -63736.0
 offset_top = -38646.0
 offset_right = 223968.0
 offset_bottom = 70368.0
-scale = Vector2(0.5, 1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_e5cm4")
 stretch_mode = 1
 
